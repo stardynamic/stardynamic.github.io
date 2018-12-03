@@ -807,9 +807,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","42");
+		_this.setReserved("build","126");
 	} else {
-		_this.h["build"] = "42";
+		_this.h["build"] = "126";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -4147,6 +4147,101 @@ DocumentClass.__super__ = Main;
 DocumentClass.prototype = $extend(Main.prototype,{
 	__class__: DocumentClass
 });
+var DateTools = function() { };
+$hxClasses["DateTools"] = DateTools;
+DateTools.__name__ = ["DateTools"];
+DateTools.__format_get = function(d,e) {
+	switch(e) {
+	case "%":
+		return "%";
+	case "A":
+		return DateTools.DAY_NAMES[d.getDay()];
+	case "B":
+		return DateTools.MONTH_NAMES[d.getMonth()];
+	case "C":
+		return StringTools.lpad(Std.string(d.getFullYear() / 100 | 0),"0",2);
+	case "D":
+		return DateTools.__format(d,"%m/%d/%y");
+	case "F":
+		return DateTools.__format(d,"%Y-%m-%d");
+	case "I":case "l":
+		var hour = d.getHours() % 12;
+		return StringTools.lpad(Std.string(hour == 0 ? 12 : hour),e == "I" ? "0" : " ",2);
+	case "M":
+		return StringTools.lpad(Std.string(d.getMinutes()),"0",2);
+	case "R":
+		return DateTools.__format(d,"%H:%M");
+	case "S":
+		return StringTools.lpad(Std.string(d.getSeconds()),"0",2);
+	case "T":
+		return DateTools.__format(d,"%H:%M:%S");
+	case "Y":
+		return Std.string(d.getFullYear());
+	case "a":
+		return DateTools.DAY_SHORT_NAMES[d.getDay()];
+	case "b":case "h":
+		return DateTools.MONTH_SHORT_NAMES[d.getMonth()];
+	case "d":
+		return StringTools.lpad(Std.string(d.getDate()),"0",2);
+	case "e":
+		return Std.string(d.getDate());
+	case "H":case "k":
+		return StringTools.lpad(Std.string(d.getHours()),e == "H" ? "0" : " ",2);
+	case "m":
+		return StringTools.lpad(Std.string(d.getMonth() + 1),"0",2);
+	case "n":
+		return "\n";
+	case "p":
+		if(d.getHours() > 11) {
+			return "PM";
+		} else {
+			return "AM";
+		}
+		break;
+	case "r":
+		return DateTools.__format(d,"%I:%M:%S %p");
+	case "s":
+		return Std.string(d.getTime() / 1000 | 0);
+	case "t":
+		return "\t";
+	case "u":
+		var t = d.getDay();
+		if(t == 0) {
+			return "7";
+		} else if(t == null) {
+			return "null";
+		} else {
+			return "" + t;
+		}
+		break;
+	case "w":
+		return Std.string(d.getDay());
+	case "y":
+		return StringTools.lpad(Std.string(d.getFullYear() % 100),"0",2);
+	default:
+		throw new js__$Boot_HaxeError("Date.format %" + e + "- not implemented yet.");
+	}
+};
+DateTools.__format = function(d,f) {
+	var r_b = "";
+	var p = 0;
+	while(true) {
+		var np = f.indexOf("%",p);
+		if(np < 0) {
+			break;
+		}
+		var len = np - p;
+		r_b += len == null ? HxOverrides.substr(f,p,null) : HxOverrides.substr(f,p,len);
+		r_b += Std.string(DateTools.__format_get(d,HxOverrides.substr(f,np + 1,1)));
+		p = np + 2;
+	}
+	var len1 = f.length - p;
+	r_b += len1 == null ? HxOverrides.substr(f,p,null) : HxOverrides.substr(f,p,len1);
+	return r_b;
+};
+DateTools.format = function(d,f) {
+	return DateTools.__format(d,f);
+};
 var EReg = function(r,opt) {
 	this.r = new RegExp(r,opt.split("u").join(""));
 };
@@ -4372,13 +4467,20 @@ ManifestResources.init = function(config) {
 		rootPath = "";
 	}
 	lime_utils_Assets.defaultRootPath = rootPath;
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
 	var data;
 	var manifest;
 	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:pathy24:assets%2Fimages%2Fbg.pngy4:sizei552507y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y38:assets%2Fimages%2FUntitled-Artwork.pngR2i1173825R3R4R5R7R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3y4:TEXTR5R8R6tgoR0y28:assets%2Fimages%2Fbutton.pngR2i35143R3R4R5R10R6tgoR0y30:assets%2Fimages%2Fbutton_1.pngR2i1212R3R4R5R11R6tgoR0y45:assets%2Fimages%2F800px_COLOURBOX10124189.jpgR2i175970R3R4R5R12R6tgoR0y32:assets%2Fimages%2Fbutton_yes.pngR2i33827R3R4R5R13R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R9R5R14R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R9R5R15R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R9R5R16R6tgoR2i21664R3y4:FONTy9:classNamey25:__ASSET__assets_alarm_ttfR5y18:assets%2Falarm.ttfR6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR22y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R21R5y26:flixel%2Fsounds%2Fbeep.mp3R23aR25y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R26R23aR25R26hgoR2i33629R3R27R5R24R23aR22R24hgoR2i15744R3R17R18y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R17R18y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R4R5R32R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R4R5R33R6tgoR0y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR2i201R3R4R5R34R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR2i185R3R4R5R35R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR2i534R3R4R5R36R6tgoR0y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR2i459R3R4R5R37R6tgoR0y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR2i247R3R4R5R38R6tgoR0y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR2i129R3R4R5R39R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR2i433R3R4R5R40R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR2i136R3R4R5R41R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR2i294R3R4R5R42R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR2i253R3R4R5R43R6tgoR0y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR2i912R3R4R5R44R6tgoR0y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR2i446R3R4R5R45R6tgoR0y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR2i212R3R4R5R46R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR2i192R3R4R5R47R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR2i1724R3R4R5R48R6tgoR0y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR2i210R3R4R5R49R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR2i946R3R4R5R50R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR2i153R3R4R5R51R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR2i147R3R4R5R52R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR2i214R3R4R5R53R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR2i156R3R4R5R54R6tgoR0y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR2i493R3R4R5R55R6tgoR0y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR2i511R3R4R5R56R6tgoR0y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR2i191R3R4R5R57R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR2i922R3R4R5R58R6tgoR0y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR2i128R3R4R5R59R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR2i18509R3R4R5R60R6tgoR0y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR2i1848R3R9R5R61R6tgoR0y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR2i1953R3R9R5R62R6tgoR0y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR2i1263R3R9R5R63R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	data = "{\"name\":null,\"assets\":\"aoy4:sizei49020y4:typey4:FONTy9:classNamey25:__ASSET__assets_lovey_ttfy2:idy18:assets%2Flovey.ttfy7:preloadtgoR0i64328R1R2R3y24:__ASSET__assets_room_otfR5y17:assets%2Froom.otfR7tgoy4:pathy24:assets%2Fimages%2Fbg.pngR0i552507R1y5:IMAGER5R11R7tgoR10y39:assets%2Fimages%2Falarm_clock_night.pngR0i326R1R12R5R13R7tgoR10y38:assets%2Fimages%2FUntitled-Artwork.pngR0i1173825R1R12R5R14R7tgoR10y34:assets%2Fimages%2Fcup_nood_day.pngR0i2158R1R12R5R15R7tgoR10y36:assets%2Fimages%2Fimages-go-here.txtR0zR1y4:TEXTR5R16R7tgoR10y31:assets%2Fimages%2Fpromptbox.pngR0i19065R1R12R5R18R7tgoR10y37:assets%2Fimages%2Falarm_clock_day.pngR0i328R1R12R5R19R7tgoR10y28:assets%2Fimages%2Fbutton.pngR0i35143R1R12R5R20R7tgoR10y36:assets%2Fimages%2Fcup_nood_night.pngR0i2163R1R12R5R21R7tgoR10y30:assets%2Fimages%2Fbutton_1.pngR0i1212R1R12R5R22R7tgoR10y33:assets%2Fimages%2Falarm_clock.pngR0i428R1R12R5R23R7tgoR10y25:assets%2Fimages%2Fmug.pngR0i1654R1R12R5R24R7tgoR10y33:assets%2Fimages%2Fno_btn_down.pngR0i2832R1R12R5R25R7tgoR10y30:assets%2Fimages%2Ftext_box.pngR0i638R1R12R5R26R7tgoR10y29:assets%2Fimages%2Fyes_btn.pngR0i845R1R12R5R27R7tgoR10y32:assets%2Fimages%2Fbutton_yes.pngR0i33827R1R12R5R28R7tgoR10y31:assets%2Fimages%2Fbg_scaled.pngR0i309314R1R12R5R29R7tgoR10y30:assets%2Fimages%2Fcup_nood.pngR0i4399R1R12R5R30R7tgoR10y34:assets%2Fimages%2Fyes_btn_down.pngR0i1247R1R12R5R31R7tgoR10y28:assets%2Fimages%2Fno_btn.pngR0i15623R1R12R5R32R7tgoR10y34:assets%2Fdata%2Fdata-goes-here.txtR0zR1R17R5R33R7tgoR0i190108R1R2R3y35:__ASSET__assets_matrixcomplexnc_ttfR5y28:assets%2FMatrixComplexNC.ttfR7tgoR10y36:assets%2Fsounds%2Fsounds-go-here.txtR0zR1R17R5R36R7tgoR10y36:assets%2Fmusic%2Fmusic-goes-here.txtR0zR1R17R5R37R7tgoR0i82480R1R2R3y26:__ASSET__assets_prompt_ttfR5y19:assets%2Fprompt.ttfR7tgoR0i145000R1R2R3y28:__ASSET__assets_roommate_ttfR5y21:assets%2Froommate.ttfR7tgoR0i13828R1R2R3y24:__ASSET__assets_love_ttfR5y17:assets%2Flove.ttfR7tgoR0i21664R1R2R3y25:__ASSET__assets_alarm_ttfR5y18:assets%2Falarm.ttfR7tgoR0i730792R1R2R3y28:__ASSET__assets_screen_1_ttfR5y21:assets%2Fscreen_1.ttfR7tgoR0i39706R1y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR49y28:flixel%2Fsounds%2Fflixel.ogghR7tgoR0i2114R1R48R5y26:flixel%2Fsounds%2Fbeep.mp3R50aR52y26:flixel%2Fsounds%2Fbeep.ogghR7tgoR0i5794R1y5:SOUNDR5R53R50aR52R53hgoR0i33629R1R54R5R51R50aR49R51hgoR0i15744R1R2R3y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR7tgoR0i29724R1R2R3y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR7tgoR10y33:flixel%2Fimages%2Fui%2Fbutton.pngR0i519R1R12R5R59R7tgoR10y36:flixel%2Fimages%2Flogo%2Fdefault.pngR0i3280R1R12R5R60R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR0i201R1R12R5R61R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR0i185R1R12R5R62R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR0i534R1R12R5R63R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR0i459R1R12R5R64R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR0i247R1R12R5R65R7tgoR10y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR0i129R1R12R5R66R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR0i433R1R12R5R67R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR0i136R1R12R5R68R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR0i294R1R12R5R69R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR0i253R1R12R5R70R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR0i912R1R12R5R71R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR0i446R1R12R5R72R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR0i212R1R12R5R73R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR0i192R1R12R5R74R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR0i1724R1R12R5R75R7tgoR10y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR0i210R1R12R5R76R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR0i946R1R12R5R77R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR0i153R1R12R5R78R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR0i147R1R12R5R79R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR0i214R1R12R5R80R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR0i156R1R12R5R81R7tgoR10y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR0i493R1R12R5R82R7tgoR10y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR0i511R1R12R5R83R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR0i191R1R12R5R84R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR0i922R1R12R5R85R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR0i128R1R12R5R86R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR0i18509R1R12R5R87R7tgoR10y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR0i1848R1R17R5R88R7tgoR10y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR0i1953R1R17R5R89R7tgoR10y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR0i1263R1R17R5R90R7tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -4574,6 +4676,108 @@ lime_text_Font.prototype = {
 	}
 	,__class__: lime_text_Font
 };
+var _$_$ASSET_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__assets_lovey_ttf"] = function() {
+	this.ascender = 825;
+	this.descender = -425;
+	this.height = 1250;
+	this.numGlyphs = 258;
+	this.underlinePosition = -143;
+	this.underlineThickness = 20;
+	this.unitsPerEM = 1000;
+	this.name = "Alex Brush";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_lovey_ttf"] = _$_$ASSET_$_$assets_$lovey_$ttf;
+_$_$ASSET_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__assets_lovey_ttf"];
+_$_$ASSET_$_$assets_$lovey_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$lovey_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$lovey_$ttf
+});
+var _$_$ASSET_$_$assets_$room_$otf = $hx_exports["__ASSET__assets_room_otf"] = function() {
+	this.ascender = 942;
+	this.descender = -210;
+	this.height = 1180;
+	this.numGlyphs = 135;
+	this.underlinePosition = 0;
+	this.underlineThickness = 0;
+	this.unitsPerEM = 1000;
+	this.name = "Twisted System DEMO Regular";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_room_otf"] = _$_$ASSET_$_$assets_$room_$otf;
+_$_$ASSET_$_$assets_$room_$otf.__name__ = ["__ASSET__assets_room_otf"];
+_$_$ASSET_$_$assets_$room_$otf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$room_$otf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$room_$otf
+});
+var _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__assets_matrixcomplexnc_ttf"] = function() {
+	this.ascender = 700;
+	this.descender = -100;
+	this.height = 823;
+	this.numGlyphs = 112;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Matrix Complex NC";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf;
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__assets_matrixcomplexnc_ttf"];
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf
+});
+var _$_$ASSET_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__assets_prompt_ttf"] = function() {
+	this.ascender = 1024;
+	this.descender = 0;
+	this.height = 1024;
+	this.numGlyphs = 559;
+	this.underlinePosition = -48;
+	this.underlineThickness = 51;
+	this.unitsPerEM = 1024;
+	this.name = "Press Start 2P";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_prompt_ttf"] = _$_$ASSET_$_$assets_$prompt_$ttf;
+_$_$ASSET_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__assets_prompt_ttf"];
+_$_$ASSET_$_$assets_$prompt_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$prompt_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$prompt_$ttf
+});
+var _$_$ASSET_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__assets_roommate_ttf"] = function() {
+	this.ascender = 855;
+	this.descender = -253;
+	this.height = 1150;
+	this.numGlyphs = 132;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Abalone";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_roommate_ttf"] = _$_$ASSET_$_$assets_$roommate_$ttf;
+_$_$ASSET_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__assets_roommate_ttf"];
+_$_$ASSET_$_$assets_$roommate_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$roommate_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$roommate_$ttf
+});
+var _$_$ASSET_$_$assets_$love_$ttf = $hx_exports["__ASSET__assets_love_ttf"] = function() {
+	this.ascender = 800;
+	this.descender = -200;
+	this.height = 1000;
+	this.numGlyphs = 56;
+	this.underlinePosition = -143;
+	this.underlineThickness = 20;
+	this.unitsPerEM = 1000;
+	this.name = "PEACECHILD BETA";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_love_ttf"] = _$_$ASSET_$_$assets_$love_$ttf;
+_$_$ASSET_$_$assets_$love_$ttf.__name__ = ["__ASSET__assets_love_ttf"];
+_$_$ASSET_$_$assets_$love_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$love_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$love_$ttf
+});
 var _$_$ASSET_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__assets_alarm_ttf"] = function() {
 	this.ascender = 1716;
 	this.descender = -418;
@@ -4590,6 +4794,23 @@ _$_$ASSET_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__assets_alarm_ttf"];
 _$_$ASSET_$_$assets_$alarm_$ttf.__super__ = lime_text_Font;
 _$_$ASSET_$_$assets_$alarm_$ttf.prototype = $extend(lime_text_Font.prototype,{
 	__class__: _$_$ASSET_$_$assets_$alarm_$ttf
+});
+var _$_$ASSET_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__assets_screen_1_ttf"] = function() {
+	this.ascender = 1491;
+	this.descender = -431;
+	this.height = 2229;
+	this.numGlyphs = 3290;
+	this.underlinePosition = -292;
+	this.underlineThickness = 150;
+	this.unitsPerEM = 2048;
+	this.name = "AlphaSmart 3000";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_screen_1_ttf"] = _$_$ASSET_$_$assets_$screen_$1_$ttf;
+_$_$ASSET_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__assets_screen_1_ttf"];
+_$_$ASSET_$_$assets_$screen_$1_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$screen_$1_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$screen_$1_$ttf
 });
 var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__flixel_fonts_nokiafc22_ttf"] = function() {
 	this.ascender = 2048;
@@ -4706,6 +4927,66 @@ openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
 	,__class__: openfl_text_Font
 	,__properties__: {set_fontName:"set_fontName",get_fontName:"get_fontName"}
 });
+var _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__OPENFL__assets_lovey_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$lovey_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_lovey_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__OPENFL__assets_lovey_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf = $hx_exports["__ASSET__OPENFL__assets_room_otf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$room_$otf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_room_otf"] = _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf;
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__name__ = ["__ASSET__OPENFL__assets_room_otf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__OPENFL__assets_prompt_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$prompt_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_prompt_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__OPENFL__assets_prompt_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__OPENFL__assets_roommate_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$roommate_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_roommate_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__OPENFL__assets_roommate_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf = $hx_exports["__ASSET__OPENFL__assets_love_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$love_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_love_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__name__ = ["__ASSET__OPENFL__assets_love_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf
+});
 var _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__OPENFL__assets_alarm_ttf"] = function() {
 	this.__fromLimeFont(new _$_$ASSET_$_$assets_$alarm_$ttf());
 	openfl_text_Font.call(this);
@@ -4715,6 +4996,16 @@ _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__OPENFL__assets_a
 _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__super__ = openfl_text_Font;
 _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.prototype = $extend(openfl_text_Font.prototype,{
 	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__OPENFL__assets_screen_1_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$screen_$1_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_screen_1_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__OPENFL__assets_screen_1_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf
 });
 var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = function() {
 	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf());
@@ -5468,45 +5759,117 @@ var PlayState = function(MaxSize) {
 };
 $hxClasses["PlayState"] = PlayState;
 PlayState.__name__ = ["PlayState"];
+PlayState.yesBtn = null;
+PlayState.noBtn = null;
+PlayState.ramenCup = null;
+PlayState.computerBtn = null;
+PlayState._prompt = null;
+PlayState.responseText = null;
+PlayState.health = null;
+PlayState._AlarmTime = null;
+PlayState.currentTime = null;
+PlayState._currentPrompt = null;
+PlayState.currentTimePenalty = null;
+PlayState.alarmClockImage = null;
+PlayState.promptBox = null;
+PlayState.setNight = function() {
+	if(PlayState.night) {
+		PlayState.ramenCup.loadGraphic("assets/images/cup_nood_night.png",false,100,100);
+		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,145,145);
+		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,145,145);
+		PlayState.alarmClockImage.loadGraphic("assets/images/alarm_clock_night.png",false,10,500);
+	} else {
+		PlayState.ramenCup.loadGraphic("assets/images/cup_nood_day.png",false,100,100);
+		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,145,145);
+		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,145,145);
+		PlayState.alarmClockImage.loadGraphic("assets/images/alarm_clock_day.png",false,10,500);
+	}
+};
 PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
-	yesBtn: null
-	,noBtn: null
-	,_prompt: null
-	,_AlarmTime: null
-	,_internalTime: null
-	,create: function() {
+	create: function() {
+		PlayState.oneDay = 86400000;
+		PlayState.fifteenMinutes = 900000;
 		flixel_FlxG.mouse.set_visible(true);
-		this._internalTime = 900;
+		PlayState.currentTime = new Date(2018,11,30,21,0,0);
+		PlayState.health = 5;
 		var bg = new flixel_FlxSprite(0,0);
 		bg.loadGraphic("assets/images/bg.png");
 		flixel_FlxG.cameras.set_bgColor(-16777216);
-		this.yesBtn = new flixel_ui_FlxButton(200,800,"",$bind(this,this.onYesClick));
-		this.noBtn = new flixel_ui_FlxButton(800,800,"",$bind(this,this.onNoClick));
-		this.noBtn.loadGraphic("assets/images/button.png",false,145,145);
-		this.yesBtn.loadGraphic("assets/images/button_yes.png",false,145,145);
-		this._prompt = new flixel_text_FlxText(0,0,1280);
-		this._prompt.set_text("Hey buddy.  You left your dishes in the sink.  Could you take care of those for me?");
-		this._prompt.setFormat("assets/alarm.ttf",35,-65536,"center");
-		var _this = this._prompt;
+		PlayState.yesBtn = new flixel_ui_FlxButton(1100,400,"",$bind(this,this.onYesClick));
+		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,400,200);
+		PlayState.noBtn = new flixel_ui_FlxButton(200,268,"",$bind(this,this.onNoClick));
+		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,400,200);
+		PlayState.ramenCup = new flixel_ui_FlxButton(740,570,"");
+		PlayState.ramenCup.loadGraphic("assets/images/cup_nood_day.png",false,100,100);
+		PlayState.alarmClockImage = new flixel_FlxSprite();
+		PlayState.alarmClockImage.loadGraphic("assets/images/alarm_clock_day.png",false,100,100);
+		PlayState.alarmClockImage.setPosition(50,490);
+		PlayState.promptBox = new flixel_FlxSprite();
+		PlayState.promptBox.loadGraphic("assets/images/promptbox.png",false,100,100);
+		PlayState.promptBox.setPosition(20,790);
+		PlayState._prompt = new flixel_text_FlxText(100,800,1000);
+		PlayState._prompt.set_text(Util._DEFAULT_PROMPT);
+		PlayState._prompt.setFormat("assets/prompt.ttf",35,-1,"center");
+		var _this = PlayState._prompt;
 		_this.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
 		_this.set_borderColor(-16777216);
 		_this.set_borderSize(1);
 		_this.set_borderQuality(1);
+		PlayState.responseText = new flixel_text_FlxText(220,320,400);
+		PlayState.responseText.set_text("");
+		PlayState.responseText.setFormat("assets/screen_1.ttf",15,-16777216,"center");
+		PlayState._AlarmTime = new flixel_text_FlxText(55,520,100);
+		PlayState._AlarmTime.set_text("" + DateTools.format(PlayState.currentTime,"%H:%M"));
+		PlayState._AlarmTime.setFormat("assets/alarm.ttf",30,-65536,"center");
+		var _this1 = PlayState._AlarmTime;
+		_this1.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
+		_this1.set_borderColor(-16777216);
+		_this1.set_borderSize(1);
+		_this1.set_borderQuality(1);
+		PlayState._currentPrompt = Util._DEFAULT_PROMPT;
+		PlayState.yesBtn.onOver.callback = $bind(this,this.YesOnButtonOver);
+		PlayState.yesBtn.onOut.callback = $bind(this,this.YesOnButtonOut);
+		PlayState.noBtn.onOver.callback = $bind(this,this.NoOnButtonOver);
+		PlayState.noBtn.onOut.callback = $bind(this,this.NoOnButtonOut);
 		this.add(bg);
-		this.add(this.yesBtn);
-		this.add(this.noBtn);
-		this.add(this._prompt);
+		this.add(PlayState.promptBox);
+		this.add(PlayState.yesBtn);
+		this.add(PlayState.noBtn);
+		this.add(PlayState.ramenCup);
+		this.add(PlayState.alarmClockImage);
+		this.add(PlayState._prompt);
+		this.add(PlayState._AlarmTime);
+		this.add(PlayState.responseText);
 		flixel_FlxState.prototype.create.call(this);
 	}
+	,YesOnButtonOver: function() {
+		PlayState.responseText.set_text(Util.gameResponseYes[Util.gameSequence]);
+		PlayState.yesBtn.loadGraphic("assets/images/yes_btn_down.png",false,400,200);
+		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
+		PlayState._AlarmTime.set_text("" + DateTools.format(new Date(t),"%H:%M"));
+	}
+	,YesOnButtonOut: function() {
+		PlayState.responseText.set_text("");
+		PlayState._AlarmTime.set_text("" + DateTools.format(PlayState.currentTime,"%H:%M"));
+		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,400,200);
+	}
+	,NoOnButtonOver: function() {
+		PlayState.responseText.set_text(Util.gameResponseNo[Util.gameSequence]);
+		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
+		PlayState._AlarmTime.set_text("" + DateTools.format(new Date(t),"%H:%M"));
+		PlayState.noBtn.loadGraphic("assets/images/no_btn_down.png",false,400,200);
+	}
+	,NoOnButtonOut: function() {
+		PlayState.responseText.set_text("");
+		PlayState._AlarmTime.set_text("" + DateTools.format(PlayState.currentTime,"%H:%M"));
+		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,400,200);
+	}
 	,onYesClick: function() {
-		this._prompt.set_text("clicked yes");
+		Util.advanceGame(true);
 	}
 	,onNoClick: function() {
-		this._prompt.set_text("clicked no");
-	}
-	,destroy: function() {
-		flixel_FlxState.prototype.destroy.call(this);
+		Util.advanceGame(false);
 	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
@@ -5716,6 +6079,13 @@ StringTools.rtrim = function(s) {
 };
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
+};
+StringTools.lpad = function(s,c,l) {
+	if(c.length <= 0) {
+		return s;
+	}
+	while(s.length < l) s = c + s;
+	return s;
 };
 StringTools.replace = function(s,sub,by) {
 	return s.split(sub).join(by);
@@ -5951,6 +6321,41 @@ _$UInt_UInt_$Impl_$.toFloat = function(this1) {
 	} else {
 		return $int + 0.0;
 	}
+};
+var Util = function() { };
+$hxClasses["Util"] = Util;
+Util.__name__ = ["Util"];
+Util.advanceGame = function(answer) {
+	Util.gameSequence += 1;
+	if(answer) {
+		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
+		PlayState.currentTime = new Date(t);
+	}
+	if(Util.promptOrder[Util.gameSequence] == 0) {
+		PlayState._prompt.setFormat("assets/prompt.ttf",30,-1,"center");
+		var _this = PlayState._prompt;
+		_this.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
+		_this.set_borderColor(-16777216);
+		_this.set_borderSize(2);
+		_this.set_borderQuality(1);
+	}
+	if(Util.promptOrder[Util.gameSequence] == 1) {
+		PlayState._prompt.setFormat("assets/lovey.ttf",50,-16181,"center");
+		var _this1 = PlayState._prompt;
+		_this1.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
+		_this1.set_borderColor(-65536);
+		_this1.set_borderSize(2);
+		_this1.set_borderQuality(1);
+	}
+	if(Util.promptOrder[Util.gameSequence] == 2) {
+		PlayState._prompt.setFormat("assets/room.otf",45,-16744448,"center");
+		var _this2 = PlayState._prompt;
+		_this2.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
+		_this2.set_borderColor(-16777216);
+		_this2.set_borderSize(2);
+		_this2.set_borderQuality(1);
+	}
+	PlayState._prompt.set_text(Util.gamePrompts[Util.gameSequence]);
 };
 var Xml = function(nodeType) {
 	this.nodeType = nodeType;
@@ -12908,6 +13313,553 @@ flixel_FlxSubState.prototype = $extend(flixel_FlxState.prototype,{
 	}
 	,__class__: flixel_FlxSubState
 });
+var flixel_addons_util_FlxFSMState = function() {
+};
+$hxClasses["flixel.addons.util.FlxFSMState"] = flixel_addons_util_FlxFSMState;
+flixel_addons_util_FlxFSMState.__name__ = ["flixel","addons","util","FlxFSMState"];
+flixel_addons_util_FlxFSMState.__interfaces__ = [flixel_util_IFlxDestroyable];
+flixel_addons_util_FlxFSMState.prototype = {
+	enter: function(owner,fsm) {
+	}
+	,update: function(elapsed,owner,fsm) {
+	}
+	,exit: function(owner) {
+	}
+	,destroy: function() {
+	}
+	,__class__: flixel_addons_util_FlxFSMState
+};
+var flixel_addons_util_FlxFSM = function(owner,state) {
+	this.age = 0;
+	this.set_owner(owner);
+	this.set_state(state);
+	this.type = 0;
+	this.transitions = new flixel_addons_util_FlxFSMTransitionTable();
+	this.pools = new haxe_ds_StringMap();
+};
+$hxClasses["flixel.addons.util.FlxFSM"] = flixel_addons_util_FlxFSM;
+flixel_addons_util_FlxFSM.__name__ = ["flixel","addons","util","FlxFSM"];
+flixel_addons_util_FlxFSM.__interfaces__ = [flixel_util_IFlxDestroyable];
+flixel_addons_util_FlxFSM.prototype = {
+	owner: null
+	,state: null
+	,stateClass: null
+	,age: null
+	,name: null
+	,type: null
+	,stack: null
+	,transitions: null
+	,pools: null
+	,update: function(elapsed) {
+		if(this.state != null && this.owner != null) {
+			this.age += elapsed;
+			this.state.update(elapsed,this.owner,this);
+		}
+		if(this.transitions != null && this.pools != null) {
+			var newStateClass = this.transitions.poll(this.stateClass,this.owner);
+			if(newStateClass != this.stateClass) {
+				var curName = null;
+				if(this.stateClass != null) {
+					curName = Type.getClassName(this.stateClass);
+				}
+				var newName = Type.getClassName(newStateClass);
+				var tmp;
+				if(newName != null) {
+					var _this = this.pools;
+					tmp = !(__map_reserved[newName] != null ? _this.existsReserved(newName) : _this.h.hasOwnProperty(newName));
+				} else {
+					tmp = false;
+				}
+				if(tmp) {
+					var this1 = this.pools;
+					var value = new flixel_util_FlxPool(newStateClass);
+					var _this1 = this1;
+					if(__map_reserved[newName] != null) {
+						_this1.setReserved(newName,value);
+					} else {
+						_this1.h[newName] = value;
+					}
+				}
+				var returnToPool = this.state;
+				var _this2 = this.pools;
+				this.set_state((__map_reserved[newName] != null ? _this2.getReserved(newName) : _this2.h[newName]).get());
+				var tmp1;
+				if(this.state != null && curName != null) {
+					var _this3 = this.pools;
+					if(__map_reserved[curName] != null) {
+						tmp1 = _this3.existsReserved(curName);
+					} else {
+						tmp1 = _this3.h.hasOwnProperty(curName);
+					}
+				} else {
+					tmp1 = false;
+				}
+				if(tmp1) {
+					var _this4 = this.pools;
+					(__map_reserved[curName] != null ? _this4.getReserved(curName) : _this4.h[curName]).put(returnToPool);
+				}
+			}
+		}
+	}
+	,destroy: function() {
+		this.set_owner(null);
+		this.set_state(null);
+		this.stack = null;
+		this.name = null;
+		this.transitions = null;
+		this.pools = null;
+	}
+	,set_owner: function(owner) {
+		if(this.owner != owner) {
+			if(this.owner != null && this.state != null) {
+				this.state.exit(this.owner);
+			}
+			this.owner = owner;
+			if(this.owner != null && this.state != null) {
+				this.age = 0;
+				this.state.enter(this.owner,this);
+			}
+		}
+		return this.owner;
+	}
+	,set_state: function(state) {
+		var newClass = state == null ? null : js_Boot.getClass(state);
+		if(this.stateClass != newClass) {
+			if(this.owner != null && this.state != null) {
+				this.state.exit(this.owner);
+			}
+			this.state = state;
+			if(this.state != null && this.owner != null) {
+				this.age = 0;
+				this.state.enter(this.owner,this);
+			}
+			this.stateClass = newClass;
+		}
+		return state;
+	}
+	,__class__: flixel_addons_util_FlxFSM
+	,__properties__: {set_state:"set_state",set_owner:"set_owner"}
+};
+var flixel_addons_util__$FlxFSM_FlxFSMStackSignal = function() {
+	if(flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal == null) {
+		flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal = new flixel_util__$FlxSignal_FlxSignal1();
+	}
+};
+$hxClasses["flixel.addons.util._FlxFSM.FlxFSMStackSignal"] = flixel_addons_util__$FlxFSM_FlxFSMStackSignal;
+flixel_addons_util__$FlxFSM_FlxFSMStackSignal.__name__ = ["flixel","addons","util","_FlxFSM","FlxFSMStackSignal"];
+flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal = null;
+flixel_addons_util__$FlxFSM_FlxFSMStackSignal.prototype = {
+	globalLock: function(type) {
+		flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal.dispatch(type);
+	}
+	,__class__: flixel_addons_util__$FlxFSM_FlxFSMStackSignal
+};
+var flixel_addons_util_FlxFSMStack = function() {
+	flixel_addons_util__$FlxFSM_FlxFSMStackSignal.call(this);
+	this._stack = [];
+	this._lockedNames = [];
+	this._lockedTypes = 0;
+	this._hasLocks = false;
+	flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal.add($bind(this,this.lockType));
+};
+$hxClasses["flixel.addons.util.FlxFSMStack"] = flixel_addons_util_FlxFSMStack;
+flixel_addons_util_FlxFSMStack.__name__ = ["flixel","addons","util","FlxFSMStack"];
+flixel_addons_util_FlxFSMStack.__interfaces__ = [flixel_util_IFlxDestroyable];
+flixel_addons_util_FlxFSMStack.__super__ = flixel_addons_util__$FlxFSM_FlxFSMStackSignal;
+flixel_addons_util_FlxFSMStack.prototype = $extend(flixel_addons_util__$FlxFSM_FlxFSMStackSignal.prototype,{
+	_stack: null
+	,_alteredStack: null
+	,_hasLocks: null
+	,_lockedNames: null
+	,_lockedTypes: null
+	,_lockRemaining: null
+	,update: function(elapsed) {
+		if(this._alteredStack != null) {
+			this._stack = this._alteredStack.slice();
+			this._alteredStack = null;
+		}
+		var _g = 0;
+		var _g1 = this._stack;
+		while(_g < _g1.length) {
+			var fsm = _g1[_g];
+			++_g;
+			if(this._hasLocks) {
+				if(this._lockRemaining == false && (fsm.type & this._lockedTypes) == 0 && this._lockedNames.indexOf(fsm.name) == -1) {
+					fsm.update(elapsed);
+				}
+			} else {
+				fsm.update(elapsed);
+			}
+		}
+		if(this._lockedNames.length != 0) {
+			this._lockedNames = [];
+		}
+		this._lockRemaining = false;
+		this._lockedTypes = 0;
+		this._hasLocks = false;
+	}
+	,lock: function(name) {
+		if(this._lockedNames.indexOf(name) == -1) {
+			this._lockedNames.push(name);
+			this._hasLocks = true;
+		}
+	}
+	,lockRemaining: function() {
+		this._lockRemaining = true;
+		this._hasLocks = true;
+	}
+	,lockType: function(bitflag) {
+		this._lockedTypes |= bitflag;
+		this._hasLocks = true;
+	}
+	,unshift: function(FSM) {
+		if(this._alteredStack == null) {
+			this._alteredStack = this._stack.slice();
+		}
+		FSM.stack = this;
+		this._alteredStack.unshift(FSM);
+	}
+	,shift: function() {
+		if(this._alteredStack == null) {
+			this._alteredStack = this._stack.slice();
+		}
+		var FSM = this._alteredStack.shift();
+		flixel_util_FlxDestroyUtil.destroy(FSM);
+		return FSM;
+	}
+	,push: function(FSM) {
+		if(this._alteredStack == null) {
+			this._alteredStack = this._stack.slice();
+		}
+		FSM.stack = this;
+		this._alteredStack.push(FSM);
+	}
+	,pop: function() {
+		if(this._alteredStack == null) {
+			this._alteredStack = this._stack.slice();
+		}
+		var FSM = this._alteredStack.pop();
+		this.lock(FSM.name);
+		flixel_util_FlxDestroyUtil.destroy(FSM);
+		return FSM;
+	}
+	,remove: function(FSM) {
+		if(this._alteredStack == null) {
+			this._alteredStack = this._stack.slice();
+		}
+		if(HxOverrides.remove(this._alteredStack,FSM)) {
+			this.lock(FSM.name);
+			flixel_util_FlxDestroyUtil.destroy(FSM);
+		}
+	}
+	,removeByName: function(name) {
+		var _g = 0;
+		var _g1 = this._stack;
+		while(_g < _g1.length) {
+			var fsm = _g1[_g];
+			++_g;
+			if(fsm.name == name) {
+				this.remove(fsm);
+			}
+		}
+	}
+	,destroy: function() {
+		var _g = 0;
+		var _g1 = this._stack;
+		while(_g < _g1.length) {
+			var fsm = _g1[_g];
+			++_g;
+			flixel_util_FlxDestroyUtil.destroy(fsm);
+		}
+		this.lockRemaining();
+		flixel_addons_util__$FlxFSM_FlxFSMStackSignal._lockSignal.remove($bind(this,this.lockType));
+	}
+	,get_isEmpty: function() {
+		return this._stack.length == 0;
+	}
+	,__class__: flixel_addons_util_FlxFSMStack
+	,__properties__: {get_isEmpty:"get_isEmpty"}
+});
+var flixel_addons_util_FlxFSMTransitionTable = function() {
+	this._garbagecollect = false;
+	this._table = [];
+};
+$hxClasses["flixel.addons.util.FlxFSMTransitionTable"] = flixel_addons_util_FlxFSMTransitionTable;
+flixel_addons_util_FlxFSMTransitionTable.__name__ = ["flixel","addons","util","FlxFSMTransitionTable"];
+flixel_addons_util_FlxFSMTransitionTable.prototype = {
+	_table: null
+	,_startState: null
+	,_garbagecollect: null
+	,poll: function(currentState,owner) {
+		if(currentState == null && this._startState != null) {
+			return this._startState;
+		}
+		if(this._garbagecollect) {
+			this._garbagecollect = false;
+			var removeThese = [];
+			var _g = 0;
+			var _g1 = this._table;
+			while(_g < _g1.length) {
+				var transition = _g1[_g];
+				++_g;
+				if(transition.remove == true) {
+					if(transition.from == currentState) {
+						this._garbagecollect = true;
+					} else {
+						removeThese.push(transition);
+					}
+				}
+			}
+			var _g2 = 0;
+			while(_g2 < removeThese.length) {
+				var transition1 = removeThese[_g2];
+				++_g2;
+				HxOverrides.remove(this._table,transition1);
+			}
+		}
+		var _g3 = 0;
+		var _g11 = this._table;
+		while(_g3 < _g11.length) {
+			var transition2 = _g11[_g3];
+			++_g3;
+			if(transition2.from == currentState || transition2.from == null) {
+				if(transition2.evaluate(owner) == true) {
+					return transition2.to;
+				}
+			}
+		}
+		return currentState;
+	}
+	,add: function(from,to,condition) {
+		if(this.hasTransition(from,to,condition) == false) {
+			var row = new flixel_addons_util_Transition();
+			row.from = from;
+			row.to = to;
+			row.condition = condition;
+			this._table.push(row);
+		}
+		return this;
+	}
+	,addGlobal: function(to,condition) {
+		if(this.hasTransition(null,to,condition) == false) {
+			var row = new flixel_addons_util_Transition();
+			row.to = to;
+			row.condition = condition;
+			this._table.push(row);
+		}
+		return this;
+	}
+	,addTransition: function(transition) {
+		if(this._table.indexOf(transition) == -1) {
+			this._table.push(transition);
+		}
+	}
+	,start: function($with) {
+		this._startState = $with;
+		return this;
+	}
+	,replace: function(target,replacement) {
+		var _g = 0;
+		var _g1 = this._table;
+		while(_g < _g1.length) {
+			var transition = _g1[_g];
+			++_g;
+			if(transition.to == target) {
+				transition.remove = true;
+				if(transition.from == null) {
+					this.addGlobal(replacement,transition.condition);
+				} else {
+					this.add(transition.from,replacement,transition.condition);
+				}
+				this._garbagecollect = true;
+			}
+			if(transition.from == target) {
+				transition.remove = true;
+				this.add(replacement,transition.to,transition.condition);
+				this._garbagecollect = true;
+			}
+		}
+	}
+	,remove: function(from,to,condition) {
+		if(to == null) {
+			if(condition == null) {
+				var f = from;
+				var _g = 0;
+				var _g1 = this._table;
+				while(_g < _g1.length) {
+					var transition = _g1[_g];
+					++_g;
+					if(from == transition.from) {
+						transition.remove = true;
+						this._garbagecollect = true;
+					}
+				}
+			} else if(from == null) {
+				var t = to;
+				var c = condition;
+				var _g2 = 0;
+				var _g11 = this._table;
+				while(_g2 < _g11.length) {
+					var transition1 = _g11[_g2];
+					++_g2;
+					if(to == transition1.to && condition == transition1.condition) {
+						transition1.remove = true;
+						this._garbagecollect = true;
+					}
+				}
+			} else {
+				var t1 = to;
+				var c1 = condition;
+				var f1 = from;
+				var _g3 = 0;
+				var _g12 = this._table;
+				while(_g3 < _g12.length) {
+					var transition2 = _g12[_g3];
+					++_g3;
+					if(from == transition2.from && to == transition2.to && condition == transition2.condition) {
+						transition2.remove = true;
+						this._garbagecollect = true;
+					}
+				}
+			}
+		} else if(condition == null) {
+			var f2 = from;
+			var t2 = to;
+			var _g4 = 0;
+			var _g13 = this._table;
+			while(_g4 < _g13.length) {
+				var transition3 = _g13[_g4];
+				++_g4;
+				if(from == transition3.from && to == transition3.to) {
+					transition3.remove = true;
+					this._garbagecollect = true;
+				}
+			}
+		} else if(from == null) {
+			var t3 = to;
+			var c2 = condition;
+			var _g5 = 0;
+			var _g14 = this._table;
+			while(_g5 < _g14.length) {
+				var transition4 = _g14[_g5];
+				++_g5;
+				if(to == transition4.to && condition == transition4.condition) {
+					transition4.remove = true;
+					this._garbagecollect = true;
+				}
+			}
+		} else {
+			var t4 = to;
+			var c3 = condition;
+			var f3 = from;
+			var _g6 = 0;
+			var _g15 = this._table;
+			while(_g6 < _g15.length) {
+				var transition5 = _g15[_g6];
+				++_g6;
+				if(from == transition5.from && to == transition5.to && condition == transition5.condition) {
+					transition5.remove = true;
+					this._garbagecollect = true;
+				}
+			}
+		}
+	}
+	,hasTransition: function(from,to,condition) {
+		if(to == null) {
+			if(condition == null) {
+				var f = from;
+				var _g = 0;
+				var _g1 = this._table;
+				while(_g < _g1.length) {
+					var transition = _g1[_g];
+					++_g;
+					if(from == transition.from && transition.remove == false) {
+						return true;
+					}
+				}
+			} else if(from == null) {
+				var t = to;
+				var c = condition;
+				var _g2 = 0;
+				var _g11 = this._table;
+				while(_g2 < _g11.length) {
+					var transition1 = _g11[_g2];
+					++_g2;
+					if(to == transition1.to && condition == transition1.condition && transition1.remove == false) {
+						return true;
+					}
+				}
+			} else {
+				var t1 = to;
+				var c1 = condition;
+				var f1 = from;
+				var _g3 = 0;
+				var _g12 = this._table;
+				while(_g3 < _g12.length) {
+					var transition2 = _g12[_g3];
+					++_g3;
+					if(from == transition2.from && to == transition2.to && condition == transition2.condition && transition2.remove == false) {
+						return true;
+					}
+				}
+			}
+		} else if(condition == null) {
+			var f2 = from;
+			var t2 = to;
+			var _g4 = 0;
+			var _g13 = this._table;
+			while(_g4 < _g13.length) {
+				var transition3 = _g13[_g4];
+				++_g4;
+				if(from == transition3.from && to == transition3.to && transition3.remove == false) {
+					return true;
+				}
+			}
+		} else if(from == null) {
+			var t3 = to;
+			var c2 = condition;
+			var _g5 = 0;
+			var _g14 = this._table;
+			while(_g5 < _g14.length) {
+				var transition4 = _g14[_g5];
+				++_g5;
+				if(to == transition4.to && condition == transition4.condition && transition4.remove == false) {
+					return true;
+				}
+			}
+		} else {
+			var t4 = to;
+			var c3 = condition;
+			var f3 = from;
+			var _g6 = 0;
+			var _g15 = this._table;
+			while(_g6 < _g15.length) {
+				var transition5 = _g15[_g6];
+				++_g6;
+				if(from == transition5.from && to == transition5.to && condition == transition5.condition && transition5.remove == false) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	,__class__: flixel_addons_util_FlxFSMTransitionTable
+};
+var flixel_addons_util_Transition = function() {
+	this.remove = false;
+};
+$hxClasses["flixel.addons.util.Transition"] = flixel_addons_util_Transition;
+flixel_addons_util_Transition.__name__ = ["flixel","addons","util","Transition"];
+flixel_addons_util_Transition.prototype = {
+	evaluate: function(target) {
+		return this.condition(target);
+	}
+	,from: null
+	,to: null
+	,condition: null
+	,remove: null
+	,__class__: flixel_addons_util_Transition
+};
 var flixel_animation_FlxBaseAnimation = function(Parent,Name) {
 	this.curIndex = 0;
 	this.parent = Parent;
@@ -64989,7 +65941,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 854765;
+	this.version = 610990;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -108285,8 +109237,24 @@ openfl_display_DisplayObject.__tempStack = new lime_utils_ObjectPool(function() 
 },function(stack) {
 	stack.set_length(0);
 });
+DateTools.DAY_SHORT_NAMES = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+DateTools.DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+DateTools.MONTH_SHORT_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+DateTools.MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 openfl_text_Font.__fontByName = new haxe_ds_StringMap();
 openfl_text_Font.__registeredFonts = [];
+PlayState._SCREENRES_X = 1280;
+PlayState._SCREENRES_Y = 1024;
+PlayState.oneDay = 0;
+PlayState.fifteenMinutes = 0;
+PlayState.night = false;
+Util.gameSequence = 0;
+Util.healthBool = true;
+Util._DEFAULT_PROMPT = "What to do.. eat? sleep? code?";
+Util.promptOrder = [0,1,0,2,0,1,0,2,0,1,0,2,0,0];
+Util.gamePrompts = ["What to do.. eat? sleep? code?","Girlfriend: Knock.. Knock.. Hey anon! Are you home?","What to do.. eat? sleep? code?","Roommate: Hey buddy.  You left your dishes in the sink.  Could you take care of those for me?","What to do.. eat? sleep? code?","Girlfriend: Hey love.  Do you remember what today is?","What to do.. eat? sleep? code?","Roommate: Hey. will you take your laundry out of the dryer, please?","What to do.. eat? sleep? code?","Girlfriend: My car won't start, can you drive me to work?","What to do.. eat? sleep? code?","Roommate: Is now a bad time to help me fix my computer?","Hm... The smell of smoke. What to do.. eat? sleep? code?","Holy cow!  The house is on fire! Finish the game or escape the house?"];
+Util.gameResponseYes = ["Eat Ramen","Let your girlfriend in.  She is looking cute today.","Go to the bathroom","Do the dishes you left in the sink","Take a quick nap","Girlfriend: Your Birthday! I...uh...was going to make dinner with you! Let’s...have a nice...candlelit dinner??","Drink coffee","Remove clothes from dryer","Go to the bathroom","Drive Girlfriend","Oh man I really need to sleep, I don't even know whats real anymore","Yeah man.  I'll help you fix your computer","Mmm, could really go for some smoked brisket right about now... Noodles will have to do...","Screw this I'm outta here"];
+Util.gameResponseNo = ["No time for food.  We need to work!","Ignore the door.  We have work to do","No time for the bathroom.  The code wont write itself","'I'm a little busy, actually.'","Code code code","Saturday??","You totally feel fine and completely awake and are totally feel fine about it no sleepy here","Just throw it on the floor I'm BUSY","The world is your bathroom","Can't you take an uber? I need to finish this game...","idont evennned a sleep itsfine hahHAH","Kill roommate...","cOdeCOdecoDeCODE","THE GAME MUST BE COMPLETED"];
 Xml.Element = 0;
 Xml.PCData = 1;
 Xml.CData = 2;
