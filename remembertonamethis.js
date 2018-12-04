@@ -807,9 +807,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","126");
+		_this.setReserved("build","191");
 	} else {
-		_this.h["build"] = "126";
+		_this.h["build"] = "191";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -4128,7 +4128,7 @@ openfl_display_Sprite.prototype = $extend(openfl_display_DisplayObjectContainer.
 });
 var Main = function() {
 	openfl_display_Sprite.call(this);
-	this.addChild(new flixel_FlxGame(0,0,PlayState));
+	this.addChild(new flixel_FlxGame(0,0,TitleState));
 };
 $hxClasses["Main"] = Main;
 Main.__name__ = ["Main"];
@@ -4334,700 +4334,6 @@ EReg.prototype = {
 	}
 	,__class__: EReg
 };
-var HxOverrides = function() { };
-$hxClasses["HxOverrides"] = HxOverrides;
-HxOverrides.__name__ = ["HxOverrides"];
-HxOverrides.strDate = function(s) {
-	var _g = s.length;
-	switch(_g) {
-	case 8:
-		var k = s.split(":");
-		var d = new Date();
-		d["setTime"](0);
-		d["setUTCHours"](k[0]);
-		d["setUTCMinutes"](k[1]);
-		d["setUTCSeconds"](k[2]);
-		return d;
-	case 10:
-		var k1 = s.split("-");
-		return new Date(k1[0],k1[1] - 1,k1[2],0,0,0);
-	case 19:
-		var k2 = s.split(" ");
-		var y = k2[0].split("-");
-		var t = k2[1].split(":");
-		return new Date(y[0],y[1] - 1,y[2],t[0],t[1],t[2]);
-	default:
-		throw new js__$Boot_HaxeError("Invalid date format : " + s);
-	}
-};
-HxOverrides.cca = function(s,index) {
-	var x = s.charCodeAt(index);
-	if(x != x) {
-		return undefined;
-	}
-	return x;
-};
-HxOverrides.substr = function(s,pos,len) {
-	if(len == null) {
-		len = s.length;
-	} else if(len < 0) {
-		if(pos == 0) {
-			len = s.length + len;
-		} else {
-			return "";
-		}
-	}
-	return s.substr(pos,len);
-};
-HxOverrides.remove = function(a,obj) {
-	var i = a.indexOf(obj);
-	if(i == -1) {
-		return false;
-	}
-	a.splice(i,1);
-	return true;
-};
-HxOverrides.iter = function(a) {
-	return { cur : 0, arr : a, hasNext : function() {
-		return this.cur < this.arr.length;
-	}, next : function() {
-		return this.arr[this.cur++];
-	}};
-};
-var IntIterator = function(min,max) {
-	this.min = min;
-	this.max = max;
-};
-$hxClasses["IntIterator"] = IntIterator;
-IntIterator.__name__ = ["IntIterator"];
-IntIterator.prototype = {
-	min: null
-	,max: null
-	,hasNext: function() {
-		return this.min < this.max;
-	}
-	,next: function() {
-		return this.min++;
-	}
-	,__class__: IntIterator
-};
-var Lambda = function() { };
-$hxClasses["Lambda"] = Lambda;
-Lambda.__name__ = ["Lambda"];
-Lambda.array = function(it) {
-	var a = [];
-	var i = $iterator(it)();
-	while(i.hasNext()) {
-		var i1 = i.next();
-		a.push(i1);
-	}
-	return a;
-};
-var _$List_ListNode = function(item,next) {
-	this.item = item;
-	this.next = next;
-};
-$hxClasses["_List.ListNode"] = _$List_ListNode;
-_$List_ListNode.__name__ = ["_List","ListNode"];
-_$List_ListNode.prototype = {
-	item: null
-	,next: null
-	,__class__: _$List_ListNode
-};
-var _$List_ListIterator = function(head) {
-	this.head = head;
-};
-$hxClasses["_List.ListIterator"] = _$List_ListIterator;
-_$List_ListIterator.__name__ = ["_List","ListIterator"];
-_$List_ListIterator.prototype = {
-	head: null
-	,hasNext: function() {
-		return this.head != null;
-	}
-	,next: function() {
-		var val = this.head.item;
-		this.head = this.head.next;
-		return val;
-	}
-	,__class__: _$List_ListIterator
-};
-var ManifestResources = function() { };
-$hxClasses["ManifestResources"] = ManifestResources;
-ManifestResources.__name__ = ["ManifestResources"];
-ManifestResources.preloadLibraries = null;
-ManifestResources.preloadLibraryNames = null;
-ManifestResources.init = function(config) {
-	ManifestResources.preloadLibraries = [];
-	ManifestResources.preloadLibraryNames = [];
-	var rootPath = null;
-	if(config != null && Object.prototype.hasOwnProperty.call(config,"rootPath")) {
-		rootPath = Reflect.field(config,"rootPath");
-	}
-	if(rootPath == null) {
-		rootPath = "";
-	}
-	lime_utils_Assets.defaultRootPath = rootPath;
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
-	var data;
-	var manifest;
-	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:sizei49020y4:typey4:FONTy9:classNamey25:__ASSET__assets_lovey_ttfy2:idy18:assets%2Flovey.ttfy7:preloadtgoR0i64328R1R2R3y24:__ASSET__assets_room_otfR5y17:assets%2Froom.otfR7tgoy4:pathy24:assets%2Fimages%2Fbg.pngR0i552507R1y5:IMAGER5R11R7tgoR10y39:assets%2Fimages%2Falarm_clock_night.pngR0i326R1R12R5R13R7tgoR10y38:assets%2Fimages%2FUntitled-Artwork.pngR0i1173825R1R12R5R14R7tgoR10y34:assets%2Fimages%2Fcup_nood_day.pngR0i2158R1R12R5R15R7tgoR10y36:assets%2Fimages%2Fimages-go-here.txtR0zR1y4:TEXTR5R16R7tgoR10y31:assets%2Fimages%2Fpromptbox.pngR0i19065R1R12R5R18R7tgoR10y37:assets%2Fimages%2Falarm_clock_day.pngR0i328R1R12R5R19R7tgoR10y28:assets%2Fimages%2Fbutton.pngR0i35143R1R12R5R20R7tgoR10y36:assets%2Fimages%2Fcup_nood_night.pngR0i2163R1R12R5R21R7tgoR10y30:assets%2Fimages%2Fbutton_1.pngR0i1212R1R12R5R22R7tgoR10y33:assets%2Fimages%2Falarm_clock.pngR0i428R1R12R5R23R7tgoR10y25:assets%2Fimages%2Fmug.pngR0i1654R1R12R5R24R7tgoR10y33:assets%2Fimages%2Fno_btn_down.pngR0i2832R1R12R5R25R7tgoR10y30:assets%2Fimages%2Ftext_box.pngR0i638R1R12R5R26R7tgoR10y29:assets%2Fimages%2Fyes_btn.pngR0i845R1R12R5R27R7tgoR10y32:assets%2Fimages%2Fbutton_yes.pngR0i33827R1R12R5R28R7tgoR10y31:assets%2Fimages%2Fbg_scaled.pngR0i309314R1R12R5R29R7tgoR10y30:assets%2Fimages%2Fcup_nood.pngR0i4399R1R12R5R30R7tgoR10y34:assets%2Fimages%2Fyes_btn_down.pngR0i1247R1R12R5R31R7tgoR10y28:assets%2Fimages%2Fno_btn.pngR0i15623R1R12R5R32R7tgoR10y34:assets%2Fdata%2Fdata-goes-here.txtR0zR1R17R5R33R7tgoR0i190108R1R2R3y35:__ASSET__assets_matrixcomplexnc_ttfR5y28:assets%2FMatrixComplexNC.ttfR7tgoR10y36:assets%2Fsounds%2Fsounds-go-here.txtR0zR1R17R5R36R7tgoR10y36:assets%2Fmusic%2Fmusic-goes-here.txtR0zR1R17R5R37R7tgoR0i82480R1R2R3y26:__ASSET__assets_prompt_ttfR5y19:assets%2Fprompt.ttfR7tgoR0i145000R1R2R3y28:__ASSET__assets_roommate_ttfR5y21:assets%2Froommate.ttfR7tgoR0i13828R1R2R3y24:__ASSET__assets_love_ttfR5y17:assets%2Flove.ttfR7tgoR0i21664R1R2R3y25:__ASSET__assets_alarm_ttfR5y18:assets%2Falarm.ttfR7tgoR0i730792R1R2R3y28:__ASSET__assets_screen_1_ttfR5y21:assets%2Fscreen_1.ttfR7tgoR0i39706R1y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR49y28:flixel%2Fsounds%2Fflixel.ogghR7tgoR0i2114R1R48R5y26:flixel%2Fsounds%2Fbeep.mp3R50aR52y26:flixel%2Fsounds%2Fbeep.ogghR7tgoR0i5794R1y5:SOUNDR5R53R50aR52R53hgoR0i33629R1R54R5R51R50aR49R51hgoR0i15744R1R2R3y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR7tgoR0i29724R1R2R3y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR7tgoR10y33:flixel%2Fimages%2Fui%2Fbutton.pngR0i519R1R12R5R59R7tgoR10y36:flixel%2Fimages%2Flogo%2Fdefault.pngR0i3280R1R12R5R60R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR0i201R1R12R5R61R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR0i185R1R12R5R62R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR0i534R1R12R5R63R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR0i459R1R12R5R64R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR0i247R1R12R5R65R7tgoR10y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR0i129R1R12R5R66R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR0i433R1R12R5R67R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR0i136R1R12R5R68R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR0i294R1R12R5R69R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR0i253R1R12R5R70R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR0i912R1R12R5R71R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR0i446R1R12R5R72R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR0i212R1R12R5R73R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR0i192R1R12R5R74R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR0i1724R1R12R5R75R7tgoR10y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR0i210R1R12R5R76R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR0i946R1R12R5R77R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR0i153R1R12R5R78R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR0i147R1R12R5R79R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR0i214R1R12R5R80R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR0i156R1R12R5R81R7tgoR10y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR0i493R1R12R5R82R7tgoR10y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR0i511R1R12R5R83R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR0i191R1R12R5R84R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR0i922R1R12R5R85R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR0i128R1R12R5R86R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR0i18509R1R12R5R87R7tgoR10y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR0i1848R1R17R5R88R7tgoR10y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR0i1953R1R17R5R89R7tgoR10y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR0i1263R1R17R5R90R7tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
-	manifest = lime_utils_AssetManifest.parse(data,rootPath);
-	library = lime_utils_AssetLibrary.fromManifest(manifest);
-	lime_utils_Assets.registerLibrary("default",library);
-	library = lime_utils_Assets.getLibrary("default");
-	if(library != null) {
-		ManifestResources.preloadLibraries.push(library);
-	} else {
-		ManifestResources.preloadLibraryNames.push("default");
-	}
-};
-var lime_text_Font = function(name) {
-	if(name != null) {
-		this.name = name;
-	}
-	this.ascender = 0;
-	this.descender = 0;
-	this.height = 0;
-	this.numGlyphs = 0;
-	this.underlinePosition = 0;
-	this.underlineThickness = 0;
-	this.unitsPerEM = 0;
-	if(this.__fontID != null) {
-		if(lime_utils_Assets.isLocal(this.__fontID)) {
-			this.__fromBytes(lime_utils_Assets.getBytes(this.__fontID));
-		}
-	} else if(this.__fontPath != null) {
-		this.__fromFile(this.__fontPath);
-	}
-};
-$hxClasses["lime.text.Font"] = lime_text_Font;
-lime_text_Font.__name__ = ["lime","text","Font"];
-lime_text_Font.fromBytes = function(bytes) {
-	if(bytes == null) {
-		return null;
-	}
-	var font = new lime_text_Font();
-	font.__fromBytes(bytes);
-	return font;
-};
-lime_text_Font.fromFile = function(path) {
-	if(path == null) {
-		return null;
-	}
-	var font = new lime_text_Font();
-	font.__fromFile(path);
-	return font;
-};
-lime_text_Font.loadFromBytes = function(bytes) {
-	return lime_app_Future.withValue(lime_text_Font.fromBytes(bytes));
-};
-lime_text_Font.loadFromFile = function(path) {
-	var request = new lime_net__$HTTPRequest_$lime_$text_$Font();
-	return request.load(path).then(function(font) {
-		if(font != null) {
-			return lime_app_Future.withValue(font);
-		} else {
-			return lime_app_Future.withError("");
-		}
-	});
-};
-lime_text_Font.loadFromName = function(path) {
-	var font = new lime_text_Font();
-	return font.__loadFromName(path);
-};
-lime_text_Font.__measureFontNode = function(fontFamily) {
-	var node = window.document.createElement("span");
-	node.setAttribute("aria-hidden","true");
-	var text = window.document.createTextNode("BESbswy");
-	node.appendChild(text);
-	var style = node.style;
-	style.display = "block";
-	style.position = "absolute";
-	style.top = "-9999px";
-	style.left = "-9999px";
-	style.fontSize = "300px";
-	style.width = "auto";
-	style.height = "auto";
-	style.lineHeight = "normal";
-	style.margin = "0";
-	style.padding = "0";
-	style.fontVariant = "normal";
-	style.whiteSpace = "nowrap";
-	style.fontFamily = fontFamily;
-	window.document.body.appendChild(node);
-	return node;
-};
-lime_text_Font.prototype = {
-	ascender: null
-	,descender: null
-	,height: null
-	,name: null
-	,numGlyphs: null
-	,src: null
-	,underlinePosition: null
-	,underlineThickness: null
-	,unitsPerEM: null
-	,__fontID: null
-	,__fontPath: null
-	,decompose: function() {
-		return null;
-	}
-	,getGlyph: function(character) {
-		return -1;
-	}
-	,getGlyphs: function(characters) {
-		if(characters == null) {
-			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^`'\"/\\&*()[]{}<>|:;_-+=?,. ";
-		}
-		return null;
-	}
-	,getGlyphMetrics: function(glyph) {
-		return null;
-	}
-	,renderGlyph: function(glyph,fontSize) {
-		return null;
-	}
-	,renderGlyphs: function(glyphs,fontSize) {
-		return null;
-	}
-	,__copyFrom: function(other) {
-		if(other != null) {
-			this.ascender = other.ascender;
-			this.descender = other.descender;
-			this.height = other.height;
-			this.name = other.name;
-			this.numGlyphs = other.numGlyphs;
-			this.src = other.src;
-			this.underlinePosition = other.underlinePosition;
-			this.underlineThickness = other.underlineThickness;
-			this.unitsPerEM = other.unitsPerEM;
-			this.__fontID = other.__fontID;
-			this.__fontPath = other.__fontPath;
-		}
-	}
-	,__fromBytes: function(bytes) {
-		this.__fontPath = null;
-	}
-	,__fromFile: function(path) {
-		this.__fontPath = path;
-	}
-	,__initializeSource: function() {
-	}
-	,__loadFromName: function(name) {
-		var _gthis = this;
-		var promise = new lime_app_Promise();
-		this.name = name;
-		var userAgent = window.navigator.userAgent.toLowerCase();
-		var isSafari = userAgent.indexOf(" safari/") >= 0 && userAgent.indexOf(" chrome/") < 0;
-		var isUIWebView = new EReg("(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)","i").match(userAgent);
-		if(!isSafari && !isUIWebView && (window.document.fonts && ($_=window.document.fonts,$bind($_,$_.load)))) {
-			window.document.fonts.load("1em '" + name + "'").then(function(_) {
-				promise.complete(_gthis);
-			},function(_1) {
-				lime_utils_Log.warn("Could not load web font \"" + name + "\"",{ fileName : "Font.hx", lineNumber : 538, className : "lime.text.Font", methodName : "__loadFromName"});
-				promise.complete(_gthis);
-			});
-		} else {
-			var node1 = lime_text_Font.__measureFontNode("'" + name + "', sans-serif");
-			var node2 = lime_text_Font.__measureFontNode("'" + name + "', serif");
-			var width1 = node1.offsetWidth;
-			var width2 = node2.offsetWidth;
-			var interval = -1;
-			var timeout = 3000;
-			var intervalLength = 50;
-			var intervalCount = 0;
-			var loaded;
-			var timeExpired;
-			var checkFont = function() {
-				intervalCount += 1;
-				if(node1.offsetWidth == width1) {
-					loaded = node2.offsetWidth != width2;
-				} else {
-					loaded = true;
-				}
-				timeExpired = intervalCount * intervalLength >= timeout;
-				if(loaded || timeExpired) {
-					window.clearInterval(interval);
-					node1.parentNode.removeChild(node1);
-					node2.parentNode.removeChild(node2);
-					node1 = null;
-					node2 = null;
-					if(timeExpired) {
-						lime_utils_Log.warn("Could not load web font \"" + name + "\"",{ fileName : "Font.hx", lineNumber : 574, className : "lime.text.Font", methodName : "__loadFromName"});
-					}
-					promise.complete(_gthis);
-				}
-			};
-			interval = window.setInterval(checkFont,intervalLength);
-		}
-		return promise.future;
-	}
-	,__setSize: function(size) {
-	}
-	,__class__: lime_text_Font
-};
-var _$_$ASSET_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__assets_lovey_ttf"] = function() {
-	this.ascender = 825;
-	this.descender = -425;
-	this.height = 1250;
-	this.numGlyphs = 258;
-	this.underlinePosition = -143;
-	this.underlineThickness = 20;
-	this.unitsPerEM = 1000;
-	this.name = "Alex Brush";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_lovey_ttf"] = _$_$ASSET_$_$assets_$lovey_$ttf;
-_$_$ASSET_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__assets_lovey_ttf"];
-_$_$ASSET_$_$assets_$lovey_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$lovey_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$lovey_$ttf
-});
-var _$_$ASSET_$_$assets_$room_$otf = $hx_exports["__ASSET__assets_room_otf"] = function() {
-	this.ascender = 942;
-	this.descender = -210;
-	this.height = 1180;
-	this.numGlyphs = 135;
-	this.underlinePosition = 0;
-	this.underlineThickness = 0;
-	this.unitsPerEM = 1000;
-	this.name = "Twisted System DEMO Regular";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_room_otf"] = _$_$ASSET_$_$assets_$room_$otf;
-_$_$ASSET_$_$assets_$room_$otf.__name__ = ["__ASSET__assets_room_otf"];
-_$_$ASSET_$_$assets_$room_$otf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$room_$otf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$room_$otf
-});
-var _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__assets_matrixcomplexnc_ttf"] = function() {
-	this.ascender = 700;
-	this.descender = -100;
-	this.height = 823;
-	this.numGlyphs = 112;
-	this.underlinePosition = -100;
-	this.underlineThickness = 50;
-	this.unitsPerEM = 1000;
-	this.name = "Matrix Complex NC";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf;
-_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__assets_matrixcomplexnc_ttf"];
-_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf
-});
-var _$_$ASSET_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__assets_prompt_ttf"] = function() {
-	this.ascender = 1024;
-	this.descender = 0;
-	this.height = 1024;
-	this.numGlyphs = 559;
-	this.underlinePosition = -48;
-	this.underlineThickness = 51;
-	this.unitsPerEM = 1024;
-	this.name = "Press Start 2P";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_prompt_ttf"] = _$_$ASSET_$_$assets_$prompt_$ttf;
-_$_$ASSET_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__assets_prompt_ttf"];
-_$_$ASSET_$_$assets_$prompt_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$prompt_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$prompt_$ttf
-});
-var _$_$ASSET_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__assets_roommate_ttf"] = function() {
-	this.ascender = 855;
-	this.descender = -253;
-	this.height = 1150;
-	this.numGlyphs = 132;
-	this.underlinePosition = -100;
-	this.underlineThickness = 50;
-	this.unitsPerEM = 1000;
-	this.name = "Abalone";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_roommate_ttf"] = _$_$ASSET_$_$assets_$roommate_$ttf;
-_$_$ASSET_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__assets_roommate_ttf"];
-_$_$ASSET_$_$assets_$roommate_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$roommate_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$roommate_$ttf
-});
-var _$_$ASSET_$_$assets_$love_$ttf = $hx_exports["__ASSET__assets_love_ttf"] = function() {
-	this.ascender = 800;
-	this.descender = -200;
-	this.height = 1000;
-	this.numGlyphs = 56;
-	this.underlinePosition = -143;
-	this.underlineThickness = 20;
-	this.unitsPerEM = 1000;
-	this.name = "PEACECHILD BETA";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_love_ttf"] = _$_$ASSET_$_$assets_$love_$ttf;
-_$_$ASSET_$_$assets_$love_$ttf.__name__ = ["__ASSET__assets_love_ttf"];
-_$_$ASSET_$_$assets_$love_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$love_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$love_$ttf
-});
-var _$_$ASSET_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__assets_alarm_ttf"] = function() {
-	this.ascender = 1716;
-	this.descender = -418;
-	this.height = 2356;
-	this.numGlyphs = 236;
-	this.underlinePosition = -292;
-	this.underlineThickness = 150;
-	this.unitsPerEM = 2048;
-	this.name = "alarm clock";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_alarm_ttf"] = _$_$ASSET_$_$assets_$alarm_$ttf;
-_$_$ASSET_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__assets_alarm_ttf"];
-_$_$ASSET_$_$assets_$alarm_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$alarm_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$alarm_$ttf
-});
-var _$_$ASSET_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__assets_screen_1_ttf"] = function() {
-	this.ascender = 1491;
-	this.descender = -431;
-	this.height = 2229;
-	this.numGlyphs = 3290;
-	this.underlinePosition = -292;
-	this.underlineThickness = 150;
-	this.unitsPerEM = 2048;
-	this.name = "AlphaSmart 3000";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_screen_1_ttf"] = _$_$ASSET_$_$assets_$screen_$1_$ttf;
-_$_$ASSET_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__assets_screen_1_ttf"];
-_$_$ASSET_$_$assets_$screen_$1_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$screen_$1_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$screen_$1_$ttf
-});
-var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__flixel_fonts_nokiafc22_ttf"] = function() {
-	this.ascender = 2048;
-	this.descender = -512;
-	this.height = 2816;
-	this.numGlyphs = 172;
-	this.underlinePosition = -640;
-	this.underlineThickness = 256;
-	this.unitsPerEM = 2048;
-	this.name = "Nokia Cellphone FC Small";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__flixel_fonts_nokiafc22_ttf"];
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf
-});
-var _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf = $hx_exports["__ASSET__flixel_fonts_monsterrat_ttf"] = function() {
-	this.ascender = 968;
-	this.descender = -251;
-	this.height = 1219;
-	this.numGlyphs = 263;
-	this.underlinePosition = -150;
-	this.underlineThickness = 50;
-	this.unitsPerEM = 1000;
-	this.name = "Monsterrat";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__flixel_fonts_monsterrat_ttf"];
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf
-});
-var openfl_text_Font = function(name) {
-	lime_text_Font.call(this,name);
-};
-$hxClasses["openfl.text.Font"] = openfl_text_Font;
-openfl_text_Font.__name__ = ["openfl","text","Font"];
-openfl_text_Font.enumerateFonts = function(enumerateDeviceFonts) {
-	if(enumerateDeviceFonts == null) {
-		enumerateDeviceFonts = false;
-	}
-	return openfl_text_Font.__registeredFonts;
-};
-openfl_text_Font.fromBytes = function(bytes) {
-	var font = new openfl_text_Font();
-	font.__fromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes));
-	return font;
-};
-openfl_text_Font.fromFile = function(path) {
-	var font = new openfl_text_Font();
-	font.__fromFile(path);
-	return font;
-};
-openfl_text_Font.loadFromBytes = function(bytes) {
-	return lime_text_Font.loadFromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes)).then(function(limeFont) {
-		var font = new openfl_text_Font();
-		font.__fromLimeFont(limeFont);
-		return lime_app_Future.withValue(font);
-	});
-};
-openfl_text_Font.loadFromFile = function(path) {
-	return lime_text_Font.loadFromFile(path).then(function(limeFont) {
-		var font = new openfl_text_Font();
-		font.__fromLimeFont(limeFont);
-		return lime_app_Future.withValue(font);
-	});
-};
-openfl_text_Font.loadFromName = function(path) {
-	return lime_text_Font.loadFromName(path).then(function(limeFont) {
-		var font = new openfl_text_Font();
-		font.__fromLimeFont(limeFont);
-		return lime_app_Future.withValue(font);
-	});
-};
-openfl_text_Font.registerFont = function(font) {
-	var instance = null;
-	var o = font;
-	if((o == null ? null : js_Boot.getClass(o)) == null) {
-		instance = js_Boot.__cast(Type.createInstance(font,[]) , openfl_text_Font);
-	} else {
-		instance = js_Boot.__cast(font , openfl_text_Font);
-	}
-	if(instance != null) {
-		openfl_text_Font.__registeredFonts.push(instance);
-		var k = instance.name;
-		var _this = openfl_text_Font.__fontByName;
-		if(__map_reserved[k] != null) {
-			_this.setReserved(k,instance);
-		} else {
-			_this.h[k] = instance;
-		}
-	}
-};
-openfl_text_Font.__super__ = lime_text_Font;
-openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
-	fontStyle: null
-	,fontType: null
-	,__initialized: null
-	,__fromLimeFont: function(font) {
-		this.__copyFrom(font);
-	}
-	,__initialize: function() {
-		return this.__initialized;
-	}
-	,get_fontName: function() {
-		return this.name;
-	}
-	,set_fontName: function(value) {
-		return this.name = value;
-	}
-	,__class__: openfl_text_Font
-	,__properties__: {set_fontName:"set_fontName",get_fontName:"get_fontName"}
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__OPENFL__assets_lovey_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$lovey_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_lovey_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__OPENFL__assets_lovey_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf = $hx_exports["__ASSET__OPENFL__assets_room_otf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$room_$otf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_room_otf"] = _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf;
-_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__name__ = ["__ASSET__OPENFL__assets_room_otf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__OPENFL__assets_prompt_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$prompt_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_prompt_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__OPENFL__assets_prompt_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__OPENFL__assets_roommate_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$roommate_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_roommate_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__OPENFL__assets_roommate_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf = $hx_exports["__ASSET__OPENFL__assets_love_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$love_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_love_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__name__ = ["__ASSET__OPENFL__assets_love_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__OPENFL__assets_alarm_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$alarm_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_alarm_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__OPENFL__assets_alarm_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__OPENFL__assets_screen_1_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$screen_$1_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_screen_1_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf;
-_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__OPENFL__assets_screen_1_ttf"];
-_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"];
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"];
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf
-});
-Math.__name__ = ["Math"];
 var flixel_util_IFlxDestroyable = function() { };
 $hxClasses["flixel.util.IFlxDestroyable"] = flixel_util_IFlxDestroyable;
 flixel_util_IFlxDestroyable.__name__ = ["flixel","util","IFlxDestroyable"];
@@ -5754,6 +5060,864 @@ flixel_FlxState.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 	,__class__: flixel_FlxState
 	,__properties__: $extend(flixel_group_FlxTypedGroup.prototype.__properties__,{set_bgColor:"set_bgColor",get_bgColor:"get_bgColor"})
 });
+var flixel_FlxSubState = function(BGColor) {
+	if(BGColor == null) {
+		BGColor = 0;
+	}
+	this._created = false;
+	flixel_FlxState.call(this);
+	this.closeCallback = null;
+	this.openCallback = null;
+	if(flixel_FlxG.renderTile) {
+		this._bgSprite = new flixel_system_FlxBGSprite();
+	}
+	this.set_bgColor(BGColor);
+};
+$hxClasses["flixel.FlxSubState"] = flixel_FlxSubState;
+flixel_FlxSubState.__name__ = ["flixel","FlxSubState"];
+flixel_FlxSubState.__super__ = flixel_FlxState;
+flixel_FlxSubState.prototype = $extend(flixel_FlxState.prototype,{
+	openCallback: null
+	,closeCallback: null
+	,_bgSprite: null
+	,_parentState: null
+	,_bgColor: null
+	,_created: null
+	,draw: function() {
+		if(flixel_FlxG.renderBlit) {
+			var _g = 0;
+			var _g1 = this.get_cameras();
+			while(_g < _g1.length) {
+				var camera = _g1[_g];
+				++_g;
+				camera.fill(this._bgColor);
+			}
+		} else {
+			this._bgSprite.draw();
+		}
+		flixel_FlxState.prototype.draw.call(this);
+	}
+	,destroy: function() {
+		flixel_FlxState.prototype.destroy.call(this);
+		this.closeCallback = null;
+		this.openCallback = null;
+		this._parentState = null;
+		this._bgSprite = null;
+	}
+	,close: function() {
+		if(this._parentState != null && this._parentState.subState == this) {
+			this._parentState.closeSubState();
+		}
+	}
+	,get_bgColor: function() {
+		return this._bgColor;
+	}
+	,set_bgColor: function(Value) {
+		if(flixel_FlxG.renderTile && this._bgSprite != null) {
+			this._bgSprite.get_pixels().setPixel32(0,0,Value);
+		}
+		return this._bgColor = Value;
+	}
+	,__class__: flixel_FlxSubState
+});
+var GameOverState = function(BGColor) {
+	this.time = 0;
+	this.served = 0;
+	flixel_FlxSubState.call(this,BGColor);
+};
+$hxClasses["GameOverState"] = GameOverState;
+GameOverState.__name__ = ["GameOverState"];
+GameOverState.__super__ = flixel_FlxSubState;
+GameOverState.prototype = $extend(flixel_FlxSubState.prototype,{
+	_txtTitle: null
+	,_txtServed: null
+	,_txtDefeated: null
+	,_txtTime: null
+	,served: null
+	,time: null
+	,create: function() {
+		flixel_FlxSubState.prototype.create.call(this);
+		var shade = new flixel_FlxSprite(0,0);
+		shade.makeGraphic(1280,720,-1157627904);
+		this.add(shade);
+		if(Util.ending) {
+			this._txtTitle = new flixel_text_FlxText(0,20,0,"GAME\nCOMPLETE!",70);
+		} else {
+			this._txtTitle = new flixel_text_FlxText(0,20,0,"GAME\nOVER",70);
+		}
+		this._txtTitle.set_alignment("center");
+		this._txtTitle.screenCenter(flixel_util_FlxAxes.X);
+		this._txtTitle.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE_FAST);
+		this._txtTitle.set_borderColor(-16777216);
+		this._txtTitle.set_borderSize(3);
+		this.add(this._txtTitle);
+		if(Util.ending) {
+			this._txtServed = new flixel_text_FlxText(0,250,0,"You completed your LudumDare game!",50);
+		} else {
+			this._txtServed = new flixel_text_FlxText(0,250,0,"You failed your LudumDare game..",50);
+		}
+		this._txtServed.set_alignment("center");
+		this._txtServed.screenCenter(flixel_util_FlxAxes.X);
+		this._txtServed.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE_FAST);
+		this._txtServed.set_borderColor(-16777216);
+		this._txtServed.set_borderSize(3);
+		this.add(this._txtServed);
+	}
+	,update: function(elapsed) {
+		flixel_FlxSubState.prototype.update.call(this,elapsed);
+	}
+	,__class__: GameOverState
+});
+var HxOverrides = function() { };
+$hxClasses["HxOverrides"] = HxOverrides;
+HxOverrides.__name__ = ["HxOverrides"];
+HxOverrides.strDate = function(s) {
+	var _g = s.length;
+	switch(_g) {
+	case 8:
+		var k = s.split(":");
+		var d = new Date();
+		d["setTime"](0);
+		d["setUTCHours"](k[0]);
+		d["setUTCMinutes"](k[1]);
+		d["setUTCSeconds"](k[2]);
+		return d;
+	case 10:
+		var k1 = s.split("-");
+		return new Date(k1[0],k1[1] - 1,k1[2],0,0,0);
+	case 19:
+		var k2 = s.split(" ");
+		var y = k2[0].split("-");
+		var t = k2[1].split(":");
+		return new Date(y[0],y[1] - 1,y[2],t[0],t[1],t[2]);
+	default:
+		throw new js__$Boot_HaxeError("Invalid date format : " + s);
+	}
+};
+HxOverrides.cca = function(s,index) {
+	var x = s.charCodeAt(index);
+	if(x != x) {
+		return undefined;
+	}
+	return x;
+};
+HxOverrides.substr = function(s,pos,len) {
+	if(len == null) {
+		len = s.length;
+	} else if(len < 0) {
+		if(pos == 0) {
+			len = s.length + len;
+		} else {
+			return "";
+		}
+	}
+	return s.substr(pos,len);
+};
+HxOverrides.remove = function(a,obj) {
+	var i = a.indexOf(obj);
+	if(i == -1) {
+		return false;
+	}
+	a.splice(i,1);
+	return true;
+};
+HxOverrides.iter = function(a) {
+	return { cur : 0, arr : a, hasNext : function() {
+		return this.cur < this.arr.length;
+	}, next : function() {
+		return this.arr[this.cur++];
+	}};
+};
+var IntIterator = function(min,max) {
+	this.min = min;
+	this.max = max;
+};
+$hxClasses["IntIterator"] = IntIterator;
+IntIterator.__name__ = ["IntIterator"];
+IntIterator.prototype = {
+	min: null
+	,max: null
+	,hasNext: function() {
+		return this.min < this.max;
+	}
+	,next: function() {
+		return this.min++;
+	}
+	,__class__: IntIterator
+};
+var Lambda = function() { };
+$hxClasses["Lambda"] = Lambda;
+Lambda.__name__ = ["Lambda"];
+Lambda.array = function(it) {
+	var a = [];
+	var i = $iterator(it)();
+	while(i.hasNext()) {
+		var i1 = i.next();
+		a.push(i1);
+	}
+	return a;
+};
+var _$List_ListNode = function(item,next) {
+	this.item = item;
+	this.next = next;
+};
+$hxClasses["_List.ListNode"] = _$List_ListNode;
+_$List_ListNode.__name__ = ["_List","ListNode"];
+_$List_ListNode.prototype = {
+	item: null
+	,next: null
+	,__class__: _$List_ListNode
+};
+var _$List_ListIterator = function(head) {
+	this.head = head;
+};
+$hxClasses["_List.ListIterator"] = _$List_ListIterator;
+_$List_ListIterator.__name__ = ["_List","ListIterator"];
+_$List_ListIterator.prototype = {
+	head: null
+	,hasNext: function() {
+		return this.head != null;
+	}
+	,next: function() {
+		var val = this.head.item;
+		this.head = this.head.next;
+		return val;
+	}
+	,__class__: _$List_ListIterator
+};
+var ManifestResources = function() { };
+$hxClasses["ManifestResources"] = ManifestResources;
+ManifestResources.__name__ = ["ManifestResources"];
+ManifestResources.preloadLibraries = null;
+ManifestResources.preloadLibraryNames = null;
+ManifestResources.init = function(config) {
+	ManifestResources.preloadLibraries = [];
+	ManifestResources.preloadLibraryNames = [];
+	var rootPath = null;
+	if(config != null && Object.prototype.hasOwnProperty.call(config,"rootPath")) {
+		rootPath = Reflect.field(config,"rootPath");
+	}
+	if(rootPath == null) {
+		rootPath = "";
+	}
+	lime_utils_Assets.defaultRootPath = rootPath;
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
+	var data;
+	var manifest;
+	var library;
+	data = "{\"name\":null,\"assets\":\"aoy4:sizei49020y4:typey4:FONTy9:classNamey25:__ASSET__assets_lovey_ttfy2:idy18:assets%2Flovey.ttfy7:preloadtgoR0i64328R1R2R3y24:__ASSET__assets_room_otfR5y17:assets%2Froom.otfR7tgoy4:pathy39:assets%2Fimages%2Falarm_clock_night.pngR0i326R1y5:IMAGER5R11R7tgoR10y38:assets%2Fimages%2FUntitled-Artwork.pngR0i1173825R1R12R5R13R7tgoR10y38:assets%2Fimages%2FNighttime_Murder.pngR0i1138944R1R12R5R14R7tgoR10y34:assets%2Fimages%2FDaytime_Fire.jpgR0i4396357R1R12R5R15R7tgoR10y34:assets%2Fimages%2Fcup_nood_day.pngR0i2158R1R12R5R16R7tgoR10y36:assets%2Fimages%2Fimages-go-here.txtR0zR1y4:TEXTR5R17R7tgoR10y31:assets%2Fimages%2Fpromptbox.pngR0i19065R1R12R5R19R7tgoR10y37:assets%2Fimages%2Falarm_clock_day.pngR0i328R1R12R5R20R7tgoR10y28:assets%2Fimages%2Fbutton.pngR0i35143R1R12R5R21R7tgoR10y29:assets%2Fimages%2FDaytime.pngR0i552507R1R12R5R22R7tgoR10y36:assets%2Fimages%2Fcup_nood_night.pngR0i2163R1R12R5R23R7tgoR10y30:assets%2Fimages%2Fbutton_1.pngR0i1212R1R12R5R24R7tgoR10y33:assets%2Fimages%2Falarm_clock.pngR0i428R1R12R5R25R7tgoR10y25:assets%2Fimages%2Fmug.pngR0i1654R1R12R5R26R7tgoR10y33:assets%2Fimages%2Fno_btn_down.pngR0i2832R1R12R5R27R7tgoR10y43:assets%2Fimages%2FNighttime_Murder_Fire.pngR0i2124429R1R12R5R28R7tgoR10y31:assets%2Fimages%2FNighttime.pngR0i708332R1R12R5R29R7tgoR10y27:assets%2Fimages%2Ftitle.pngR0i429774R1R12R5R30R7tgoR10y36:assets%2Fimages%2FNighttime_Fire.pngR0i1914159R1R12R5R31R7tgoR10y30:assets%2Fimages%2Ftext_box.pngR0i638R1R12R5R32R7tgoR10y29:assets%2Fimages%2Fyes_btn.pngR0i845R1R12R5R33R7tgoR10y36:assets%2Fimages%2FDaytime_Murder.pngR0i1344313R1R12R5R34R7tgoR10y32:assets%2Fimages%2Fbutton_yes.pngR0i33827R1R12R5R35R7tgoR10y31:assets%2Fimages%2Fbg_scaled.pngR0i309314R1R12R5R36R7tgoR10y30:assets%2Fimages%2Fcup_nood.pngR0i4399R1R12R5R37R7tgoR10y34:assets%2Fimages%2Fyes_btn_down.pngR0i1247R1R12R5R38R7tgoR10y28:assets%2Fimages%2Fno_btn.pngR0i15623R1R12R5R39R7tgoR10y34:assets%2Fdata%2Fdata-goes-here.txtR0zR1R18R5R40R7tgoR0i190108R1R2R3y35:__ASSET__assets_matrixcomplexnc_ttfR5y28:assets%2FMatrixComplexNC.ttfR7tgoR10y36:assets%2Fsounds%2Fsounds-go-here.txtR0zR1R18R5R43R7tgoR0i350306R1y5:SOUNDR5y28:assets%2Fsounds%2FLD43_F.oggy9:pathGroupaR45hR7tgoR0i21832R1R2R3y25:__ASSET__assets_lover_ttfR5y18:assets%2Flover.ttfR7tgoR0i581675R1R44R5y27:assets%2Fmusic%2Fnormal.oggR46aR49hR7tgoR10y36:assets%2Fmusic%2Fmusic-goes-here.txtR0zR1R18R5R50R7tgoR0i350306R1R44R5y32:assets%2Fmusic%2FrushedFinal.oggR46aR51hR7tgoR0i555574R1R44R5y28:assets%2Fmusic%2Fmidgame.oggR46aR52hR7tgoR0i654196R1R44R5y27:assets%2Fmusic%2Fkilled.oggR46aR53hR7tgoR0i82480R1R2R3y26:__ASSET__assets_prompt_ttfR5y19:assets%2Fprompt.ttfR7tgoR0i145000R1R2R3y28:__ASSET__assets_roommate_ttfR5y21:assets%2Froommate.ttfR7tgoR0i13828R1R2R3y24:__ASSET__assets_love_ttfR5y17:assets%2Flove.ttfR7tgoR0i21664R1R2R3y25:__ASSET__assets_alarm_ttfR5y18:assets%2Falarm.ttfR7tgoR0i76500R1R2R3y27:__ASSET__assets_prompt1_ttfR5y20:assets%2Fprompt1.ttfR7tgoR0i730792R1R2R3y28:__ASSET__assets_screen_1_ttfR5y21:assets%2Fscreen_1.ttfR7tgoR0i39706R1y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3R46aR67y28:flixel%2Fsounds%2Fflixel.ogghR7tgoR0i2114R1R66R5y26:flixel%2Fsounds%2Fbeep.mp3R46aR69y26:flixel%2Fsounds%2Fbeep.ogghR7tgoR0i5794R1R44R5R70R46aR69R70hgoR0i33629R1R44R5R68R46aR67R68hgoR0i15744R1R2R3y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR7tgoR0i29724R1R2R3y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR7tgoR10y33:flixel%2Fimages%2Fui%2Fbutton.pngR0i519R1R12R5R75R7tgoR10y36:flixel%2Fimages%2Flogo%2Fdefault.pngR0i3280R1R12R5R76R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR0i201R1R12R5R77R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR0i185R1R12R5R78R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR0i534R1R12R5R79R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR0i459R1R12R5R80R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR0i247R1R12R5R81R7tgoR10y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR0i129R1R12R5R82R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR0i433R1R12R5R83R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR0i136R1R12R5R84R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR0i294R1R12R5R85R7tgoR10y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR0i253R1R12R5R86R7tgoR10y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR0i912R1R12R5R87R7tgoR10y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR0i446R1R12R5R88R7tgoR10y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR0i212R1R12R5R89R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR0i192R1R12R5R90R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR0i1724R1R12R5R91R7tgoR10y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR0i210R1R12R5R92R7tgoR10y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR0i946R1R12R5R93R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR0i153R1R12R5R94R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR0i147R1R12R5R95R7tgoR10y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR0i214R1R12R5R96R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR0i156R1R12R5R97R7tgoR10y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR0i493R1R12R5R98R7tgoR10y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR0i511R1R12R5R99R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR0i191R1R12R5R100R7tgoR10y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR0i922R1R12R5R101R7tgoR10y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR0i128R1R12R5R102R7tgoR10y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR0i18509R1R12R5R103R7tgoR10y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR0i1848R1R18R5R104R7tgoR10y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR0i1953R1R18R5R105R7tgoR10y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR0i1263R1R18R5R106R7tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	manifest = lime_utils_AssetManifest.parse(data,rootPath);
+	library = lime_utils_AssetLibrary.fromManifest(manifest);
+	lime_utils_Assets.registerLibrary("default",library);
+	library = lime_utils_Assets.getLibrary("default");
+	if(library != null) {
+		ManifestResources.preloadLibraries.push(library);
+	} else {
+		ManifestResources.preloadLibraryNames.push("default");
+	}
+};
+var lime_text_Font = function(name) {
+	if(name != null) {
+		this.name = name;
+	}
+	this.ascender = 0;
+	this.descender = 0;
+	this.height = 0;
+	this.numGlyphs = 0;
+	this.underlinePosition = 0;
+	this.underlineThickness = 0;
+	this.unitsPerEM = 0;
+	if(this.__fontID != null) {
+		if(lime_utils_Assets.isLocal(this.__fontID)) {
+			this.__fromBytes(lime_utils_Assets.getBytes(this.__fontID));
+		}
+	} else if(this.__fontPath != null) {
+		this.__fromFile(this.__fontPath);
+	}
+};
+$hxClasses["lime.text.Font"] = lime_text_Font;
+lime_text_Font.__name__ = ["lime","text","Font"];
+lime_text_Font.fromBytes = function(bytes) {
+	if(bytes == null) {
+		return null;
+	}
+	var font = new lime_text_Font();
+	font.__fromBytes(bytes);
+	return font;
+};
+lime_text_Font.fromFile = function(path) {
+	if(path == null) {
+		return null;
+	}
+	var font = new lime_text_Font();
+	font.__fromFile(path);
+	return font;
+};
+lime_text_Font.loadFromBytes = function(bytes) {
+	return lime_app_Future.withValue(lime_text_Font.fromBytes(bytes));
+};
+lime_text_Font.loadFromFile = function(path) {
+	var request = new lime_net__$HTTPRequest_$lime_$text_$Font();
+	return request.load(path).then(function(font) {
+		if(font != null) {
+			return lime_app_Future.withValue(font);
+		} else {
+			return lime_app_Future.withError("");
+		}
+	});
+};
+lime_text_Font.loadFromName = function(path) {
+	var font = new lime_text_Font();
+	return font.__loadFromName(path);
+};
+lime_text_Font.__measureFontNode = function(fontFamily) {
+	var node = window.document.createElement("span");
+	node.setAttribute("aria-hidden","true");
+	var text = window.document.createTextNode("BESbswy");
+	node.appendChild(text);
+	var style = node.style;
+	style.display = "block";
+	style.position = "absolute";
+	style.top = "-9999px";
+	style.left = "-9999px";
+	style.fontSize = "300px";
+	style.width = "auto";
+	style.height = "auto";
+	style.lineHeight = "normal";
+	style.margin = "0";
+	style.padding = "0";
+	style.fontVariant = "normal";
+	style.whiteSpace = "nowrap";
+	style.fontFamily = fontFamily;
+	window.document.body.appendChild(node);
+	return node;
+};
+lime_text_Font.prototype = {
+	ascender: null
+	,descender: null
+	,height: null
+	,name: null
+	,numGlyphs: null
+	,src: null
+	,underlinePosition: null
+	,underlineThickness: null
+	,unitsPerEM: null
+	,__fontID: null
+	,__fontPath: null
+	,decompose: function() {
+		return null;
+	}
+	,getGlyph: function(character) {
+		return -1;
+	}
+	,getGlyphs: function(characters) {
+		if(characters == null) {
+			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^`'\"/\\&*()[]{}<>|:;_-+=?,. ";
+		}
+		return null;
+	}
+	,getGlyphMetrics: function(glyph) {
+		return null;
+	}
+	,renderGlyph: function(glyph,fontSize) {
+		return null;
+	}
+	,renderGlyphs: function(glyphs,fontSize) {
+		return null;
+	}
+	,__copyFrom: function(other) {
+		if(other != null) {
+			this.ascender = other.ascender;
+			this.descender = other.descender;
+			this.height = other.height;
+			this.name = other.name;
+			this.numGlyphs = other.numGlyphs;
+			this.src = other.src;
+			this.underlinePosition = other.underlinePosition;
+			this.underlineThickness = other.underlineThickness;
+			this.unitsPerEM = other.unitsPerEM;
+			this.__fontID = other.__fontID;
+			this.__fontPath = other.__fontPath;
+		}
+	}
+	,__fromBytes: function(bytes) {
+		this.__fontPath = null;
+	}
+	,__fromFile: function(path) {
+		this.__fontPath = path;
+	}
+	,__initializeSource: function() {
+	}
+	,__loadFromName: function(name) {
+		var _gthis = this;
+		var promise = new lime_app_Promise();
+		this.name = name;
+		var userAgent = window.navigator.userAgent.toLowerCase();
+		var isSafari = userAgent.indexOf(" safari/") >= 0 && userAgent.indexOf(" chrome/") < 0;
+		var isUIWebView = new EReg("(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)","i").match(userAgent);
+		if(!isSafari && !isUIWebView && (window.document.fonts && ($_=window.document.fonts,$bind($_,$_.load)))) {
+			window.document.fonts.load("1em '" + name + "'").then(function(_) {
+				promise.complete(_gthis);
+			},function(_1) {
+				lime_utils_Log.warn("Could not load web font \"" + name + "\"",{ fileName : "Font.hx", lineNumber : 538, className : "lime.text.Font", methodName : "__loadFromName"});
+				promise.complete(_gthis);
+			});
+		} else {
+			var node1 = lime_text_Font.__measureFontNode("'" + name + "', sans-serif");
+			var node2 = lime_text_Font.__measureFontNode("'" + name + "', serif");
+			var width1 = node1.offsetWidth;
+			var width2 = node2.offsetWidth;
+			var interval = -1;
+			var timeout = 3000;
+			var intervalLength = 50;
+			var intervalCount = 0;
+			var loaded;
+			var timeExpired;
+			var checkFont = function() {
+				intervalCount += 1;
+				if(node1.offsetWidth == width1) {
+					loaded = node2.offsetWidth != width2;
+				} else {
+					loaded = true;
+				}
+				timeExpired = intervalCount * intervalLength >= timeout;
+				if(loaded || timeExpired) {
+					window.clearInterval(interval);
+					node1.parentNode.removeChild(node1);
+					node2.parentNode.removeChild(node2);
+					node1 = null;
+					node2 = null;
+					if(timeExpired) {
+						lime_utils_Log.warn("Could not load web font \"" + name + "\"",{ fileName : "Font.hx", lineNumber : 574, className : "lime.text.Font", methodName : "__loadFromName"});
+					}
+					promise.complete(_gthis);
+				}
+			};
+			interval = window.setInterval(checkFont,intervalLength);
+		}
+		return promise.future;
+	}
+	,__setSize: function(size) {
+	}
+	,__class__: lime_text_Font
+};
+var _$_$ASSET_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__assets_lovey_ttf"] = function() {
+	this.ascender = 825;
+	this.descender = -425;
+	this.height = 1250;
+	this.numGlyphs = 258;
+	this.underlinePosition = -143;
+	this.underlineThickness = 20;
+	this.unitsPerEM = 1000;
+	this.name = "Alex Brush";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_lovey_ttf"] = _$_$ASSET_$_$assets_$lovey_$ttf;
+_$_$ASSET_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__assets_lovey_ttf"];
+_$_$ASSET_$_$assets_$lovey_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$lovey_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$lovey_$ttf
+});
+var _$_$ASSET_$_$assets_$room_$otf = $hx_exports["__ASSET__assets_room_otf"] = function() {
+	this.ascender = 942;
+	this.descender = -210;
+	this.height = 1180;
+	this.numGlyphs = 135;
+	this.underlinePosition = 0;
+	this.underlineThickness = 0;
+	this.unitsPerEM = 1000;
+	this.name = "Twisted System DEMO Regular";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_room_otf"] = _$_$ASSET_$_$assets_$room_$otf;
+_$_$ASSET_$_$assets_$room_$otf.__name__ = ["__ASSET__assets_room_otf"];
+_$_$ASSET_$_$assets_$room_$otf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$room_$otf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$room_$otf
+});
+var _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__assets_matrixcomplexnc_ttf"] = function() {
+	this.ascender = 700;
+	this.descender = -100;
+	this.height = 823;
+	this.numGlyphs = 112;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Matrix Complex NC";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf;
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__assets_matrixcomplexnc_ttf"];
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf
+});
+var _$_$ASSET_$_$assets_$lover_$ttf = $hx_exports["__ASSET__assets_lover_ttf"] = function() {
+	this.ascender = 750;
+	this.descender = -250;
+	this.height = 1000;
+	this.numGlyphs = 66;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Medinah";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_lover_ttf"] = _$_$ASSET_$_$assets_$lover_$ttf;
+_$_$ASSET_$_$assets_$lover_$ttf.__name__ = ["__ASSET__assets_lover_ttf"];
+_$_$ASSET_$_$assets_$lover_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$lover_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$lover_$ttf
+});
+var _$_$ASSET_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__assets_prompt_ttf"] = function() {
+	this.ascender = 1024;
+	this.descender = 0;
+	this.height = 1024;
+	this.numGlyphs = 559;
+	this.underlinePosition = -48;
+	this.underlineThickness = 51;
+	this.unitsPerEM = 1024;
+	this.name = "Press Start 2P";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_prompt_ttf"] = _$_$ASSET_$_$assets_$prompt_$ttf;
+_$_$ASSET_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__assets_prompt_ttf"];
+_$_$ASSET_$_$assets_$prompt_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$prompt_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$prompt_$ttf
+});
+var _$_$ASSET_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__assets_roommate_ttf"] = function() {
+	this.ascender = 855;
+	this.descender = -253;
+	this.height = 1150;
+	this.numGlyphs = 132;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Abalone";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_roommate_ttf"] = _$_$ASSET_$_$assets_$roommate_$ttf;
+_$_$ASSET_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__assets_roommate_ttf"];
+_$_$ASSET_$_$assets_$roommate_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$roommate_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$roommate_$ttf
+});
+var _$_$ASSET_$_$assets_$love_$ttf = $hx_exports["__ASSET__assets_love_ttf"] = function() {
+	this.ascender = 800;
+	this.descender = -200;
+	this.height = 1000;
+	this.numGlyphs = 56;
+	this.underlinePosition = -143;
+	this.underlineThickness = 20;
+	this.unitsPerEM = 1000;
+	this.name = "PEACECHILD BETA";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_love_ttf"] = _$_$ASSET_$_$assets_$love_$ttf;
+_$_$ASSET_$_$assets_$love_$ttf.__name__ = ["__ASSET__assets_love_ttf"];
+_$_$ASSET_$_$assets_$love_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$love_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$love_$ttf
+});
+var _$_$ASSET_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__assets_alarm_ttf"] = function() {
+	this.ascender = 1716;
+	this.descender = -418;
+	this.height = 2356;
+	this.numGlyphs = 236;
+	this.underlinePosition = -292;
+	this.underlineThickness = 150;
+	this.unitsPerEM = 2048;
+	this.name = "alarm clock";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_alarm_ttf"] = _$_$ASSET_$_$assets_$alarm_$ttf;
+_$_$ASSET_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__assets_alarm_ttf"];
+_$_$ASSET_$_$assets_$alarm_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$alarm_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$alarm_$ttf
+});
+var _$_$ASSET_$_$assets_$prompt1_$ttf = $hx_exports["__ASSET__assets_prompt1_ttf"] = function() {
+	this.ascender = 750;
+	this.descender = -250;
+	this.height = 1000;
+	this.numGlyphs = 109;
+	this.underlinePosition = -100;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Komiko";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_prompt1_ttf"] = _$_$ASSET_$_$assets_$prompt1_$ttf;
+_$_$ASSET_$_$assets_$prompt1_$ttf.__name__ = ["__ASSET__assets_prompt1_ttf"];
+_$_$ASSET_$_$assets_$prompt1_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$prompt1_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$prompt1_$ttf
+});
+var _$_$ASSET_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__assets_screen_1_ttf"] = function() {
+	this.ascender = 1491;
+	this.descender = -431;
+	this.height = 2229;
+	this.numGlyphs = 3290;
+	this.underlinePosition = -292;
+	this.underlineThickness = 150;
+	this.unitsPerEM = 2048;
+	this.name = "AlphaSmart 3000";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_screen_1_ttf"] = _$_$ASSET_$_$assets_$screen_$1_$ttf;
+_$_$ASSET_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__assets_screen_1_ttf"];
+_$_$ASSET_$_$assets_$screen_$1_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$screen_$1_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$screen_$1_$ttf
+});
+var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__flixel_fonts_nokiafc22_ttf"] = function() {
+	this.ascender = 2048;
+	this.descender = -512;
+	this.height = 2816;
+	this.numGlyphs = 172;
+	this.underlinePosition = -640;
+	this.underlineThickness = 256;
+	this.unitsPerEM = 2048;
+	this.name = "Nokia Cellphone FC Small";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__flixel_fonts_nokiafc22_ttf"];
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf
+});
+var _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf = $hx_exports["__ASSET__flixel_fonts_monsterrat_ttf"] = function() {
+	this.ascender = 968;
+	this.descender = -251;
+	this.height = 1219;
+	this.numGlyphs = 263;
+	this.underlinePosition = -150;
+	this.underlineThickness = 50;
+	this.unitsPerEM = 1000;
+	this.name = "Monsterrat";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__flixel_fonts_monsterrat_ttf"];
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf
+});
+var openfl_text_Font = function(name) {
+	lime_text_Font.call(this,name);
+};
+$hxClasses["openfl.text.Font"] = openfl_text_Font;
+openfl_text_Font.__name__ = ["openfl","text","Font"];
+openfl_text_Font.enumerateFonts = function(enumerateDeviceFonts) {
+	if(enumerateDeviceFonts == null) {
+		enumerateDeviceFonts = false;
+	}
+	return openfl_text_Font.__registeredFonts;
+};
+openfl_text_Font.fromBytes = function(bytes) {
+	var font = new openfl_text_Font();
+	font.__fromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes));
+	return font;
+};
+openfl_text_Font.fromFile = function(path) {
+	var font = new openfl_text_Font();
+	font.__fromFile(path);
+	return font;
+};
+openfl_text_Font.loadFromBytes = function(bytes) {
+	return lime_text_Font.loadFromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes)).then(function(limeFont) {
+		var font = new openfl_text_Font();
+		font.__fromLimeFont(limeFont);
+		return lime_app_Future.withValue(font);
+	});
+};
+openfl_text_Font.loadFromFile = function(path) {
+	return lime_text_Font.loadFromFile(path).then(function(limeFont) {
+		var font = new openfl_text_Font();
+		font.__fromLimeFont(limeFont);
+		return lime_app_Future.withValue(font);
+	});
+};
+openfl_text_Font.loadFromName = function(path) {
+	return lime_text_Font.loadFromName(path).then(function(limeFont) {
+		var font = new openfl_text_Font();
+		font.__fromLimeFont(limeFont);
+		return lime_app_Future.withValue(font);
+	});
+};
+openfl_text_Font.registerFont = function(font) {
+	var instance = null;
+	var o = font;
+	if((o == null ? null : js_Boot.getClass(o)) == null) {
+		instance = js_Boot.__cast(Type.createInstance(font,[]) , openfl_text_Font);
+	} else {
+		instance = js_Boot.__cast(font , openfl_text_Font);
+	}
+	if(instance != null) {
+		openfl_text_Font.__registeredFonts.push(instance);
+		var k = instance.name;
+		var _this = openfl_text_Font.__fontByName;
+		if(__map_reserved[k] != null) {
+			_this.setReserved(k,instance);
+		} else {
+			_this.h[k] = instance;
+		}
+	}
+};
+openfl_text_Font.__super__ = lime_text_Font;
+openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
+	fontStyle: null
+	,fontType: null
+	,__initialized: null
+	,__fromLimeFont: function(font) {
+		this.__copyFrom(font);
+	}
+	,__initialize: function() {
+		return this.__initialized;
+	}
+	,get_fontName: function() {
+		return this.name;
+	}
+	,set_fontName: function(value) {
+		return this.name = value;
+	}
+	,__class__: openfl_text_Font
+	,__properties__: {set_fontName:"set_fontName",get_fontName:"get_fontName"}
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf = $hx_exports["__ASSET__OPENFL__assets_lovey_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$lovey_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_lovey_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__name__ = ["__ASSET__OPENFL__assets_lovey_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$lovey_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf = $hx_exports["__ASSET__OPENFL__assets_room_otf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$room_$otf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_room_otf"] = _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf;
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__name__ = ["__ASSET__OPENFL__assets_room_otf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$room_$otf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$room_$otf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf = $hx_exports["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$matrixcomplexnc_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__name__ = ["__ASSET__OPENFL__assets_matrixcomplexnc_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$matrixcomplexnc_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf = $hx_exports["__ASSET__OPENFL__assets_lover_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$lover_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_lover_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf.__name__ = ["__ASSET__OPENFL__assets_lover_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$lover_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf = $hx_exports["__ASSET__OPENFL__assets_prompt_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$prompt_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_prompt_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__name__ = ["__ASSET__OPENFL__assets_prompt_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$prompt_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf = $hx_exports["__ASSET__OPENFL__assets_roommate_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$roommate_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_roommate_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__name__ = ["__ASSET__OPENFL__assets_roommate_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$roommate_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf = $hx_exports["__ASSET__OPENFL__assets_love_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$love_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_love_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__name__ = ["__ASSET__OPENFL__assets_love_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$love_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf = $hx_exports["__ASSET__OPENFL__assets_alarm_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$alarm_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_alarm_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__name__ = ["__ASSET__OPENFL__assets_alarm_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$alarm_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf = $hx_exports["__ASSET__OPENFL__assets_prompt1_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$prompt1_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_prompt1_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf.__name__ = ["__ASSET__OPENFL__assets_prompt1_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$prompt1_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf = $hx_exports["__ASSET__OPENFL__assets_screen_1_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$screen_$1_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_screen_1_ttf"] = _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf;
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__name__ = ["__ASSET__OPENFL__assets_screen_1_ttf"];
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$screen_$1_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"];
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"];
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf
+});
+Math.__name__ = ["Math"];
 var PlayState = function(MaxSize) {
 	flixel_FlxState.call(this,MaxSize);
 };
@@ -5772,13 +5936,47 @@ PlayState._currentPrompt = null;
 PlayState.currentTimePenalty = null;
 PlayState.alarmClockImage = null;
 PlayState.promptBox = null;
+PlayState.Daytime = null;
 PlayState.setNight = function() {
+	PlayState.night = false;
+	if(PlayState.currentTime.getHours() < 5) {
+		PlayState.night = true;
+	}
+	if(PlayState.currentTime.getHours() > 17) {
+		PlayState.night = true;
+	}
 	if(PlayState.night) {
+		if(Util.roommateKilled) {
+			if(Util.fire) {
+				PlayState.Daytime.loadGraphic("assets/images/Nighttime_Murder_Fire.png");
+				flixel_FlxG.sound.playMusic("assets/music/killedFinal.ogg");
+			} else {
+				PlayState.Daytime.loadGraphic("assets/images/Nighttime_Murder.png");
+			}
+		} else if(Util.fire) {
+			PlayState.Daytime.loadGraphic("assets/images/Nighttime_Fire.png");
+			flixel_FlxG.sound.playMusic("assets/music/rushedFinal.ogg");
+		} else {
+			PlayState.Daytime.loadGraphic("assets/images/Nighttime.png");
+		}
 		PlayState.ramenCup.loadGraphic("assets/images/cup_nood_night.png",false,100,100);
 		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,145,145);
 		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,145,145);
 		PlayState.alarmClockImage.loadGraphic("assets/images/alarm_clock_night.png",false,10,500);
 	} else {
+		if(Util.roommateKilled) {
+			if(Util.fire) {
+				flixel_FlxG.sound.playMusic("assets/music/killedFinal.ogg");
+				PlayState.Daytime.loadGraphic("assets/images/Daytime_Murder_Fire.png");
+			} else {
+				PlayState.Daytime.loadGraphic("assets/images/Daytime_Murder.png");
+			}
+		} else if(Util.fire) {
+			flixel_FlxG.sound.playMusic("assets/music/rushedFinal.ogg");
+			PlayState.Daytime.loadGraphic("assets/images/Nighttime_Fire.png");
+		} else {
+			PlayState.Daytime.loadGraphic("assets/images/Daytime.png");
+		}
 		PlayState.ramenCup.loadGraphic("assets/images/cup_nood_day.png",false,100,100);
 		PlayState.noBtn.loadGraphic("assets/images/no_btn.png",false,145,145);
 		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,145,145);
@@ -5790,11 +5988,13 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
 		PlayState.oneDay = 86400000;
 		PlayState.fifteenMinutes = 900000;
+		PlayState.twoHours = 6360000;
+		PlayState.eightHours = 28800000;
 		flixel_FlxG.mouse.set_visible(true);
 		PlayState.currentTime = new Date(2018,11,30,21,0,0);
 		PlayState.health = 5;
-		var bg = new flixel_FlxSprite(0,0);
-		bg.loadGraphic("assets/images/bg.png");
+		PlayState.Daytime = new flixel_FlxSprite(0,0);
+		PlayState.Daytime.loadGraphic("assets/images/Daytime.png");
 		flixel_FlxG.cameras.set_bgColor(-16777216);
 		PlayState.yesBtn = new flixel_ui_FlxButton(1100,400,"",$bind(this,this.onYesClick));
 		PlayState.yesBtn.loadGraphic("assets/images/yes_btn.png",false,400,200);
@@ -5810,7 +6010,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		PlayState.promptBox.setPosition(20,790);
 		PlayState._prompt = new flixel_text_FlxText(100,800,1000);
 		PlayState._prompt.set_text(Util._DEFAULT_PROMPT);
-		PlayState._prompt.setFormat("assets/prompt.ttf",35,-1,"center");
+		PlayState._prompt.setFormat("assets/prompt1.ttf",35,-1,"center");
 		var _this = PlayState._prompt;
 		_this.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
 		_this.set_borderColor(-16777216);
@@ -5818,7 +6018,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		_this.set_borderQuality(1);
 		PlayState.responseText = new flixel_text_FlxText(220,320,400);
 		PlayState.responseText.set_text("");
-		PlayState.responseText.setFormat("assets/screen_1.ttf",15,-16777216,"center");
+		PlayState.responseText.setFormat("assets/screen_1.ttf",24,-16777216,"center");
 		PlayState._AlarmTime = new flixel_text_FlxText(55,520,100);
 		PlayState._AlarmTime.set_text("" + DateTools.format(PlayState.currentTime,"%H:%M"));
 		PlayState._AlarmTime.setFormat("assets/alarm.ttf",30,-65536,"center");
@@ -5832,7 +6032,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		PlayState.yesBtn.onOut.callback = $bind(this,this.YesOnButtonOut);
 		PlayState.noBtn.onOver.callback = $bind(this,this.NoOnButtonOver);
 		PlayState.noBtn.onOut.callback = $bind(this,this.NoOnButtonOut);
-		this.add(bg);
+		this.add(PlayState.Daytime);
 		this.add(PlayState.promptBox);
 		this.add(PlayState.yesBtn);
 		this.add(PlayState.noBtn);
@@ -5841,12 +6041,13 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(PlayState._prompt);
 		this.add(PlayState._AlarmTime);
 		this.add(PlayState.responseText);
+		PlayState.setNight();
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,YesOnButtonOver: function() {
 		PlayState.responseText.set_text(Util.gameResponseYes[Util.gameSequence]);
 		PlayState.yesBtn.loadGraphic("assets/images/yes_btn_down.png",false,400,200);
-		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
+		var t = PlayState.currentTime.getTime() + PlayState.twoHours;
 		PlayState._AlarmTime.set_text("" + DateTools.format(new Date(t),"%H:%M"));
 	}
 	,YesOnButtonOut: function() {
@@ -5856,7 +6057,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	}
 	,NoOnButtonOver: function() {
 		PlayState.responseText.set_text(Util.gameResponseNo[Util.gameSequence]);
-		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
+		var t = PlayState.currentTime.getTime() + PlayState.twoHours;
 		PlayState._AlarmTime.set_text("" + DateTools.format(new Date(t),"%H:%M"));
 		PlayState.noBtn.loadGraphic("assets/images/no_btn_down.png",false,400,200);
 	}
@@ -6105,6 +6306,44 @@ StringTools.hex = function(n,digits) {
 	}
 	return s;
 };
+var TitleState = function(MaxSize) {
+	flixel_FlxState.call(this,MaxSize);
+};
+$hxClasses["TitleState"] = TitleState;
+TitleState.__name__ = ["TitleState"];
+TitleState.__super__ = flixel_FlxState;
+TitleState.prototype = $extend(flixel_FlxState.prototype,{
+	_txtTitle: null
+	,_txtInstructions: null
+	,create: function() {
+		flixel_FlxG.sound.playMusic("assets/music/normal.ogg");
+		var logo = new flixel_FlxSprite(0,0);
+		logo.loadGraphic("assets/images/title.png");
+		this.add(logo);
+		this._txtInstructions = new flixel_text_FlxText(0,440,0,"Press any key to start",25);
+		this._txtInstructions.set_alignment("center");
+		var _this = this._txtInstructions;
+		_this.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
+		_this.set_borderColor(-16777216);
+		_this.set_borderSize(2);
+		_this.set_borderQuality(1);
+		this._txtInstructions.screenCenter(flixel_util_FlxAxes.X);
+		this.add(this._txtInstructions);
+		flixel_FlxState.prototype.create.call(this);
+	}
+	,update: function(elapsed) {
+		flixel_FlxState.prototype.update.call(this,elapsed);
+		if(flixel_FlxG.keys.firstJustPressed() != -1) {
+			flixel_FlxG.camera.fade(-16777216,.33,false,function() {
+				var nextState = new PlayState();
+				if(flixel_FlxG.game._state.switchTo(nextState)) {
+					flixel_FlxG.game._requestedState = nextState;
+				}
+			});
+		}
+	}
+	,__class__: TitleState
+});
 var ValueType = $hxClasses["ValueType"] = { __ename__ : ["ValueType"], __constructs__ : ["TNull","TInt","TFloat","TBool","TObject","TFunction","TClass","TEnum","TUnknown"] };
 ValueType.TNull = ["TNull",0];
 ValueType.TNull.toString = $estr;
@@ -6327,12 +6566,31 @@ $hxClasses["Util"] = Util;
 Util.__name__ = ["Util"];
 Util.advanceGame = function(answer) {
 	Util.gameSequence += 1;
-	if(answer) {
-		var t = PlayState.currentTime.getTime() + PlayState.fifteenMinutes;
-		PlayState.currentTime = new Date(t);
+	if(Util.gameSequence > 13) {
+		Util.ending = !answer;
+		var nextState = new GameOverState();
+		if(flixel_FlxG.game._state.switchTo(nextState)) {
+			flixel_FlxG.game._requestedState = nextState;
+		}
 	}
+	flixel_FlxG.camera.fade(-16777216,.33,true);
+	if(Util.gameSequence == 5) {
+		flixel_FlxG.sound.playMusic("assets/music/midgame.ogg");
+	}
+	if(Util.gameSequence == 12) {
+		if(!answer) {
+			Util.roommateKilled = true;
+			flixel_FlxG.sound.playMusic("assets/music/killed.ogg");
+		}
+	}
+	if(Util.gameSequence == 13) {
+		Util.fire = true;
+	}
+	PlayState.setNight();
+	var t = PlayState.currentTime.getTime() + PlayState.twoHours;
+	PlayState.currentTime = new Date(t);
 	if(Util.promptOrder[Util.gameSequence] == 0) {
-		PlayState._prompt.setFormat("assets/prompt.ttf",30,-1,"center");
+		PlayState._prompt.setFormat("assets/prompt1.ttf",50,-1,"center");
 		var _this = PlayState._prompt;
 		_this.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
 		_this.set_borderColor(-16777216);
@@ -6340,7 +6598,7 @@ Util.advanceGame = function(answer) {
 		_this.set_borderQuality(1);
 	}
 	if(Util.promptOrder[Util.gameSequence] == 1) {
-		PlayState._prompt.setFormat("assets/lovey.ttf",50,-16181,"center");
+		PlayState._prompt.setFormat("assets/lover.ttf",50,-16181,"center");
 		var _this1 = PlayState._prompt;
 		_this1.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE);
 		_this1.set_borderColor(-65536);
@@ -13253,66 +13511,6 @@ flixel_IFlxSprite.prototype = {
 	,__class__: flixel_IFlxSprite
 	,__properties__: {set_immovable:"set_immovable",set_moves:"set_moves",set_facing:"set_facing",set_angle:"set_angle",set_alpha:"set_alpha",set_y:"set_y",set_x:"set_x"}
 };
-var flixel_FlxSubState = function(BGColor) {
-	if(BGColor == null) {
-		BGColor = 0;
-	}
-	this._created = false;
-	flixel_FlxState.call(this);
-	this.closeCallback = null;
-	this.openCallback = null;
-	if(flixel_FlxG.renderTile) {
-		this._bgSprite = new flixel_system_FlxBGSprite();
-	}
-	this.set_bgColor(BGColor);
-};
-$hxClasses["flixel.FlxSubState"] = flixel_FlxSubState;
-flixel_FlxSubState.__name__ = ["flixel","FlxSubState"];
-flixel_FlxSubState.__super__ = flixel_FlxState;
-flixel_FlxSubState.prototype = $extend(flixel_FlxState.prototype,{
-	openCallback: null
-	,closeCallback: null
-	,_bgSprite: null
-	,_parentState: null
-	,_bgColor: null
-	,_created: null
-	,draw: function() {
-		if(flixel_FlxG.renderBlit) {
-			var _g = 0;
-			var _g1 = this.get_cameras();
-			while(_g < _g1.length) {
-				var camera = _g1[_g];
-				++_g;
-				camera.fill(this._bgColor);
-			}
-		} else {
-			this._bgSprite.draw();
-		}
-		flixel_FlxState.prototype.draw.call(this);
-	}
-	,destroy: function() {
-		flixel_FlxState.prototype.destroy.call(this);
-		this.closeCallback = null;
-		this.openCallback = null;
-		this._parentState = null;
-		this._bgSprite = null;
-	}
-	,close: function() {
-		if(this._parentState != null && this._parentState.subState == this) {
-			this._parentState.closeSubState();
-		}
-	}
-	,get_bgColor: function() {
-		return this._bgColor;
-	}
-	,set_bgColor: function(Value) {
-		if(flixel_FlxG.renderTile && this._bgSprite != null) {
-			this._bgSprite.get_pixels().setPixel32(0,0,Value);
-		}
-		return this._bgColor = Value;
-	}
-	,__class__: flixel_FlxSubState
-});
 var flixel_addons_util_FlxFSMState = function() {
 };
 $hxClasses["flixel.addons.util.FlxFSMState"] = flixel_addons_util_FlxFSMState;
@@ -65941,7 +66139,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 610990;
+	this.version = 462550;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -109247,12 +109445,17 @@ PlayState._SCREENRES_X = 1280;
 PlayState._SCREENRES_Y = 1024;
 PlayState.oneDay = 0;
 PlayState.fifteenMinutes = 0;
+PlayState.twoHours = 0;
+PlayState.eightHours = 0;
 PlayState.night = false;
 Util.gameSequence = 0;
 Util.healthBool = true;
+Util.roommateKilled = false;
+Util.fire = false;
+Util.ending = false;
 Util._DEFAULT_PROMPT = "What to do.. eat? sleep? code?";
 Util.promptOrder = [0,1,0,2,0,1,0,2,0,1,0,2,0,0];
-Util.gamePrompts = ["What to do.. eat? sleep? code?","Girlfriend: Knock.. Knock.. Hey anon! Are you home?","What to do.. eat? sleep? code?","Roommate: Hey buddy.  You left your dishes in the sink.  Could you take care of those for me?","What to do.. eat? sleep? code?","Girlfriend: Hey love.  Do you remember what today is?","What to do.. eat? sleep? code?","Roommate: Hey. will you take your laundry out of the dryer, please?","What to do.. eat? sleep? code?","Girlfriend: My car won't start, can you drive me to work?","What to do.. eat? sleep? code?","Roommate: Is now a bad time to help me fix my computer?","Hm... The smell of smoke. What to do.. eat? sleep? code?","Holy cow!  The house is on fire! Finish the game or escape the house?"];
+Util.gamePrompts = ["What to do.. eat? sleep? code?","Girlfriend: Knock.. Knock.. Hey babe! Are you home?","What to do.. eat? sleep? code?","Roommate: Hey buddy.  You left your dishes in the sink.  Could you take care of those for me?","What to do.. eat? sleep? code?","Girlfriend: Hey love.  Do you remember what today is?","What to do.. eat? sleep? code?","Roommate: Hey. will you take your laundry out of the dryer, please?","What to do.. eat? sleep? code?","Girlfriend: My car won't start, can you drive me to work?","What to do.. eat? sleep? code?","Roommate: Is now a bad time to help me fix my computer?","Hm... The smell of smoke. What to do.. eat? sleep? code?","Holy cow!  The house is on fire! Finish the game or escape the house?"];
 Util.gameResponseYes = ["Eat Ramen","Let your girlfriend in.  She is looking cute today.","Go to the bathroom","Do the dishes you left in the sink","Take a quick nap","Girlfriend: Your Birthday! I...uh...was going to make dinner with you! Let’s...have a nice...candlelit dinner??","Drink coffee","Remove clothes from dryer","Go to the bathroom","Drive Girlfriend","Oh man I really need to sleep, I don't even know whats real anymore","Yeah man.  I'll help you fix your computer","Mmm, could really go for some smoked brisket right about now... Noodles will have to do...","Screw this I'm outta here"];
 Util.gameResponseNo = ["No time for food.  We need to work!","Ignore the door.  We have work to do","No time for the bathroom.  The code wont write itself","'I'm a little busy, actually.'","Code code code","Saturday??","You totally feel fine and completely awake and are totally feel fine about it no sleepy here","Just throw it on the floor I'm BUSY","The world is your bathroom","Can't you take an uber? I need to finish this game...","idont evennned a sleep itsfine hahHAH","Kill roommate...","cOdeCOdecoDeCODE","THE GAME MUST BE COMPLETED"];
 Xml.Element = 0;
